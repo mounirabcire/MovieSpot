@@ -1,0 +1,2 @@
+# MovieSpot
+## Documantation soon
