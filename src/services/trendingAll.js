@@ -1,4 +1,4 @@
-import { BASE_URL } from "./apiInfo";
+import { ACCESS, BASE_URL } from "./apiInfo";
 
 const TRENDING_ALL_PATH = "trending/all/day";
 const API_URL = `${BASE_URL}/${TRENDING_ALL_PATH}`;
@@ -7,8 +7,7 @@ const options = {
     method: "GET",
     headers: {
         accept: "application/json",
-        Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZTRmYTcyNTFhNzdkOTRjMTg0NTFkMmQzM2U0NmFiNyIsInN1YiI6IjY2MzQxYWE0OTU5MGUzMDEyY2JhZjZhYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GIdfKqT4Cu80acebsG6wOk91pP8KdU8bK6GRIImGjXE",
+        Authorization: `Bearer ${ACCESS}`,
     },
 };
 
