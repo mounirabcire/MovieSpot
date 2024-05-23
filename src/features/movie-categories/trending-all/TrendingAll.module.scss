@@ -1,0 +1,117 @@
+@import "../../../sass/abstracts/variables";
+
+.trending {
+    height: 100svh;
+    background: $black;
+    overflow: hidden;
+
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    &__bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($black, 0.5);
+        z-index: 5;
+    }
+
+    &__imgsContainer {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        bottom: 10rem;
+        left: 50%;
+        z-index: 10;
+        overflow: hidden;
+    }
+
+    &__imgContainer {
+        width: 12.5rem;
+        height: 18.8rem;
+        overflow: hidden;
+        position: relative;
+
+        &:not(:last-child) {
+            margin-right: $def-space;
+        }
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    &__imgInfo {
+        width: 100%;
+        min-height: 50%;
+        padding: 1rem 0.75rem;
+        background-color: rgba($black, 0.4);
+        backdrop-filter: blur(2.5px);
+        color: $copy-light;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: flex-end;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+
+        &_rate {
+            margin-top: calc($def-space / 4);
+            font-size: $text-size-md;
+        }
+    }
+
+    // Acitive trending
+    // &__active {
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     width: 100%;
+    //     height: 100%;
+    // }
+
+    &__img__active {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        bottom: 10rem;
+        left: 50%;
+        width: 12.5rem;
+        height: 18.8rem;
+        object-fit: cover;
+        z-index: -1;
+    }
+
+    &__active__box {
+        max-width: 60rem;
+        padding-left: 10rem;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+
+        h2 {
+            margin-bottom: $def-space;
+            font-size: $text-size-3xl;
+        }
+
+        p {
+            color: $copy-light;
+            line-height: 20px;
+        }
+    }
+
+    &__btns {
+        margin-top: calc($def-space * 2);
+
+        button:not(:last-child) {
+            margin-right: $def-space;
+        }
+    }
+}

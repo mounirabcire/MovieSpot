@@ -1,0 +1,46 @@
+// Media manager
+
+// 1em = 16px in media queries
+@mixin respond($breakoint) {
+  // Small smartphones
+  @if breakpoint == ph {
+    // 0 - 639
+    @media only screen and (max-widht: 39.94em) {
+      @content;
+    }
+  }
+
+  // Large smartphones
+  @if breakpoint == ph-l {
+    // 640 - 767
+    @media only screen and (max-width: 47.94em) {
+      @content;
+    }
+  }
+
+  // Tablets and small laptops
+  @if breakpoint == tab {
+    // 780 - 1023
+    @media only screen and (max-width: 63.94em) {
+      @content;
+    }
+  }
+
+  // Desktops and large laptops
+  @if breakpoint == lap {
+    // 1024 - 1279
+    @media (max-width: 79.94em) {
+      @content;
+    }
+  }
+
+  // Our normal style: 1280 - 1536
+
+  // Large desktops
+  @if breakpoint == desk {
+    // 1537 - +
+    @media (min-width: 96.06em) {
+      @content;
+    }
+  }
+}

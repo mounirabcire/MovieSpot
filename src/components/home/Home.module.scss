@@ -1,0 +1,10 @@
+.header {
+    // height: 100svh;
+
+    & > button{
+        position: fixed;
+        top: 10rem;
+        right: 5px;
+        z-index: 1000;
+    }
+}

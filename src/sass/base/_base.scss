@@ -2,24 +2,52 @@
 *,
 *::after,
 *::before {
-  padding: 0;
-  margin: 0;
-  box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+    box-sizing: inherit;
 }
 
 html {
-  // Default font-size: 16px
-  // I wanna set the default font-size to 10px
-  // So I can work with rems nicely
-  // 16px ==> 100%
-  // 10px ==> ?%
-  // 10px * 100% / 16px = 62.5%
-  font-size: 62.5%;
+    // Default font-size: 16px
+    // I wanna set the default font-size to 10px
+    // So I can work with rems nicely
+    // 16px ==> 100%
+    // 10px ==> ?%
+    // 10px * 100% / 16px = 62.5%
+    font-size: 62.5%;
 }
 
 body {
-  background-color: $bg;
-  color: $copy;
-  font-family: "Josefin Sans", sans-serif;
-  box-sizing: border-box;
+    background-color: $bg;
+    color: $copy;
+    font-size: $text-def;
+    font-family: "Josefin Sans", sans-serif;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+}
+
+::selection{
+    background-color: $primary;
+    color: $primary-content;
+}
+
+// Active link
+.active:link,
+.active:visited {
+    &::before {
+        height: 35px;
+        width: 100%;
+    }
+
+    &{
+        color: $secondary-content;
+    }
 }

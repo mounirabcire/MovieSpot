@@ -11,8 +11,11 @@
     "watch:sass": "node-sass src/sass/main.scss src/css/style.css -w"
   },
   "dependencies": {
+    "framer-motion": "^11.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.1",
+    "remixicon": "^4.2.0",
     "sass": "^1.77.2"
   },
   "devDependencies": {

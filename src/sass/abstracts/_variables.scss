@@ -1,28 +1,28 @@
 // Light mode
-$primary: #7b5dfb;
-$primary-content: #ffffff;
-$primary-dark: #522bfa;
-$primary-light: #a48ffc;
+$lm-primary: #7b5dfb;
+$lm-primary-content: #ffffff;
+$lm-primary-dark: #522bfa;
+$lm-primary-light: #a48ffc;
 
-$secondary: #abfb5d;
-$secondary-content: #2c5702;
-$secondary-dark: #91fa2b;
-$secondary-light: #c5fc8f;
+$lm-secondary: #abfb5d;
+$lm-secondary-content: #2c5702;
+$lm-secondary-dark: #91fa2b;
+$lm-secondary-light: #c5fc8f;
 
-$background: #eeedf2;
-$foreground: #fbfbfc;
-$border: #dcdae5;
+$lm-bg: #eeedf2;
+$lm-fg: #fbfbfc;
+$lm-border: #dcdae5;
 
-$copy: #22202d;
-$copy-light: #5b5478;
-$copy-lighter: #8078a0;
+$lm-copy: #22202d;
+$lm-copy-light: #5b5478;
+$lm-copy-lighter: #8078a0;
 
-$success: #5dfb5d;
-$warning: #fbfb5d;
-$error: #fb5d5d;
-$success-content: #025702;
-$warning-content: #575702;
-$error-content: #570202;
+$lm-success: #5dfb5d;
+$lm-warning: #fbfb5d;
+$lm-error: #fb5d5d;
+$lm-success-content: #025702;
+$lm-warning-content: #575702;
+$lm-error-content: #570202;
 
 // Dark mode
 $primary: #7b5dfb;
@@ -49,3 +49,20 @@ $error: #fb5d5d;
 $success-content: #025702;
 $warning-content: #575702;
 $error-content: #570202;
+
+$black: #000;
+$white: #fff;
+// Spaces
+$def-space: 2rem;
+
+// Font sizes
+$text-def: 1.5rem;
+$text-size-xs: 0.44rem;
+$text-size-sm: 0.67rem;
+$text-size-md: 1rem;
+$text-size-lg: 1.5rem;
+$text-size-xl: 2.25rem;
+$text-size-2xl: 3.38rem;
+$text-size-3xl: 5.06rem;
+$text-size-4xl: 7.59rem;
+$text-size-5xl: 11.39rem;
