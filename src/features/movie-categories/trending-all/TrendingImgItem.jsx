@@ -1,4 +1,4 @@
-import { delay, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { BASE_IMG } from "../../../services/apiInfo";
 import styles from "./TrendingAll.module.scss";
 
@@ -10,16 +10,11 @@ function TrendingImgItem({
         <motion.div
             className={styles.trending__imgContainer}
             animate={{
-                opacity: dataNum === currentTrending ? 0 : 1,
-                zIndex: dataNum === currentTrending ? -100 : 0,
+                width: dataNum === currentTrending ? 0 : "12.5rem",
                 transition: {
-                    duration: 1,
-                    delay: 0.15,
-                    ease: "linear",
-                },
-                transitionEnd: {
-                    opacity: 1,
-                    zIndex: 0,
+                    duration: 0.2,
+                    delay: 0.2,
+                    ease: [0.5, 1, 0.89, 1]
                 },
             }}
         >

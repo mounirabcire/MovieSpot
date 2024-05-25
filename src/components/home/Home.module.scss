@@ -1,10 +1,21 @@
-.header {
-    // height: 100svh;
+@import "../../sass/abstracts/variables";
 
-    & > button{
-        position: fixed;
-        top: 10rem;
-        right: 5px;
-        z-index: 1000;
+.header {
+    height: 100svh;
+    overflow: hidden;
+    position: relative;
+}
+
+.main {
+    padding-block: calc($def-space * 3);
+}
+
+.trending{
+    &__movies{
+        margin-bottom: calc($def-space * 2);
+    }
+    
+    &__headingType{
+        font-size: $text-size-xl;
     }
 }

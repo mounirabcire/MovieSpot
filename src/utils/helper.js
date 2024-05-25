@@ -1,6 +1,5 @@
 // Generate random uniqe numbers
 // 1-Using arrays
-
 export function randomUniqueNumsArr(length, max) {
     const arr = [];
 
@@ -21,4 +20,11 @@ export function randomUniqueNumsSet(length, max) {
     }
 
     return Array.from(set);
+}
+
+// Generate maximum text length
+export function maxTextProvider(text, maxTextLength) {
+    if (maxTextLength >= text.length) return text;
+
+    return text.substr(0, maxTextLength) + "...";
 }

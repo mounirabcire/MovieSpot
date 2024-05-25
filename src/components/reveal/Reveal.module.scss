@@ -1,0 +1,19 @@
+@import "../../sass/abstracts/variables";
+
+.reveal {
+    &__container {
+        width: fit-content;
+        overflow: hidden;
+        position: relative;
+    }
+
+    &__el {
+        width: 100%;
+        height: 100%;
+        background-color: $copy;
+        backface-visibility: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}

@@ -1,7 +1,13 @@
 @import "../../sass/abstracts/variables";
+@import "../../sass/abstracts/mixins";
 
 .nav {
-    // padding-block: $def-space;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    backdrop-filter: blur(5px);
 
     &__wrapper {
         display: flex;
@@ -9,10 +15,15 @@
         align-items: center;
     }
 
+    &__linkList,
+    &__paramsList {
+        // @include respond(tab) {
+        //     background-color: red;
+        // }
+    }
+
     &__linkList {
         padding: $def-space calc($def-space * 3);
-        background-color: rgba($black, 0.2);
-        backdrop-filter: blur(5px);
         border-radius: 0px 0px 20px 20px;
         overflow: hidden;
     }
@@ -40,7 +51,7 @@
             display: block;
             width: 5px;
             height: 3px;
-            background-color: $secondary;
+            background-color: $primary;
             border-radius: 5px;
             position: absolute;
             bottom: -5px;
@@ -57,7 +68,31 @@
         }
     }
 
-    &__paramsItem > i {
+    &__paramsItem {
+        position: relative;
         cursor: pointer;
+        z-index: 1;
+
+        &::after {
+            content: "";
+            width: 0.5rem;
+            height: 0.5rem;
+            border-radius: 100%;
+            position: absolute;
+            top: -0.5rem;
+            right: -0.5rem;
+            background-color: $primary;
+            transition: all 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+            z-index: -1;
+        }
+
+        &:hover::after {
+            width: 2.4rem;
+            height: 2.4rem;
+        }
+
+        &:hover > i {
+            color: $primary-content;
+        }
     }
 }

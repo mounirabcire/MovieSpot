@@ -1,19 +1,19 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-    randomUniqueNumsSet,
-} from "../../../utils/helper";
+
+import { randomUniqueNumsSet } from "../../../utils/helper";
 import { getTrendingAll } from "../../../services/trendingAll";
+
 import styles from "./TrendingAll.module.scss";
 import TrendingImgItem from "./TrendingImgItem";
 import CurrentTrendingImg from "./CurrentTrendingImg";
 import CurrentTrendingContent from "./CurrentTrendingContent";
 
-function TrendingAll({ activeTrend }) {
-    const { results: data } = useLoaderData();
+function TrendingAll({data}) {
     // const [activeTrend, setActiveTrend] = useState(0);
     const [fir, sec, thi, fou, fif] = randomUniqueNumsSet(5, 19);
+    const [activeTrend, setActiveTrend] = useState(0);
     const [trending_all, setTrendingAll] = useState([
         {
             id: data[fir].id,
@@ -70,10 +70,6 @@ function TrendingAll({ activeTrend }) {
     }
 
     useEffect(() => {
-        console.log("rendered");
-    }, []);
-
-    useEffect(() => {
         const set = setTimeout(() => {
             setTrendingAll(currState => {
                 const newTrendingAll = [...currState];
@@ -87,18 +83,46 @@ function TrendingAll({ activeTrend }) {
         return () => clearTimeout(set);
     }, [activeTrend]);
 
+    useEffect(() => {
+        const set = setInterval(() => {
+            setActiveTrend(prev => (prev === 4 ? 0 : prev + 1));
+        }, 7000);
+
+        return () => clearInterval(set);
+    }, []);
+
     return (
         <div className={styles.trending}>
-            <AnimatePresence mode="wait">
+            <motion.div
+                initial={{
+                    width: 0,
+                }}
+                animate={{
+                    width: "100%",
+                    transition: {
+                        duration: 7,
+                        ease: "linear",
+                        repeat: Infinity,
+                    },
+                }}
+                className={styles.trending__progressBar}
+            />
+
+            <AnimatePresence initial={false}>
                 <CurrentTrendingImg
                     key={activeTrend}
                     trend={getActiveTrend(activeTrend)}
                 />
             </AnimatePresence>
 
-            <CurrentTrendingContent trend={getActiveTrend(activeTrend)} />
+            <AnimatePresence mode="wait">
+                <CurrentTrendingContent
+                    key={activeTrend}
+                    trend={getActiveTrend(activeTrend)}
+                />
+            </AnimatePresence>
 
-            <AnimatePresence>
+            <AnimatePresence initial={false}>
                 <div
                     className={styles.trending__imgsContainer}
                     key={activeTrend}

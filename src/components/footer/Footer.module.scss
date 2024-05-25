@@ -1,0 +1,41 @@
+@import "../../sass/abstracts/variables";
+
+.footer{
+    padding: calc($def-space * 7);
+    text-align: center;
+    background-color: $fg;
+    
+    &__heading{
+        font-size: $text-size-3xl;
+    }
+
+    &__subHeading{
+        margin-top: calc($def-space / 2);
+        margin-bottom: calc($def-space);
+        font-size: $text-size-lg;
+        font-weight: 400;
+    }
+
+    &__form{
+        margin: 0 auto;
+        width: 75%;
+        position: relative;
+    }
+
+    &__input{
+        padding: 1.25rem .75rem;
+        width: 100%;
+        border: 1px solid $border;
+        background-color: $fg;
+        border-radius: 5px;
+        color: $copy;
+
+        &::placeholder{
+            color: $copy-lighter;
+        }
+
+        &:focus{
+            outline: none;
+        }
+    }
+}

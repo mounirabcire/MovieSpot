@@ -6,8 +6,8 @@ import { loader as loaderTrendingAll } from "./features/movie-categories/trendin
 import ErrorEl from "./components/error-element/ErrorEl";
 import AppLayout from "./components/app-layout/AppLayout";
 
-// TODO: Create AppLayout componenet (The parent route) that contains the navbar and other
-// elements that might appear in all pages.
+// TODO: Add a feature on the Navbar component(using isInView hook).
+
 function App() {
     const router = createBrowserRouter([
         {
@@ -17,7 +17,6 @@ function App() {
                 {
                     path: "/",
                     element: <Home />,
-                    errorElement: <ErrorEl />,
                     loader: loaderTrendingAll,
                 },
                 {

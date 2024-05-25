@@ -1,0 +1,5 @@
+1- How to secure sensitive data when pushing it in git repo
+2- we can pass the "initial={false}" into the AnimatePresence compoenent to disable any initial animations on children that are present when the component is first rendered.
+3- we can wrapp multiple child that we want to animate into AnimatePresence compoenent (The component being removed must be a direct
+ descendant of AnimatePresence (direct child).)
+4- using useInview Hook along with useAnimation Hook from framer motion

@@ -1,20 +1,22 @@
 @import "../../../sass/abstracts/variables";
 
 .trending {
-    height: 100svh;
-    background: $black;
-    overflow: hidden;
-
-    position: absolute;
-    inset: 0;
-    z-index: -1;
+    &__progressBar {
+        width: 100%;
+        height: 2px;
+        background-color: $secondary;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 100;
+    }
 
     &__bg {
         position: absolute;
         inset: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba($black, 0.5);
+        background-color: rgba($black, 0.45);
         z-index: 5;
     }
 
@@ -33,6 +35,8 @@
         height: 18.8rem;
         overflow: hidden;
         position: relative;
+        transform-origin: right;
+        transition: all 0.3s;
 
         &:not(:last-child) {
             margin-right: $def-space;
@@ -46,36 +50,8 @@
         border-radius: 5px;
     }
 
-    &__imgInfo {
-        width: 100%;
-        min-height: 50%;
-        padding: 1rem 0.75rem;
-        background-color: rgba($black, 0.4);
-        backdrop-filter: blur(2.5px);
-        color: $copy-light;
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-        justify-content: flex-end;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-
-        &_rate {
-            margin-top: calc($def-space / 4);
-            font-size: $text-size-md;
-        }
-    }
 
     // Acitive trending
-    // &__active {
-    //     position: absolute;
-    //     top: 0;
-    //     left: 0;
-    //     width: 100%;
-    //     height: 100%;
-    // }
-
     &__img__active {
         position: absolute;
         bottom: 0;

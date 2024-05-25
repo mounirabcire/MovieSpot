@@ -28,4 +28,11 @@
         // box-shadow: 0px 2px 10px $secondary-dark;
         color: $primary-content;
     }
+
+    &__normal{
+        border-radius: 50px;
+        border: 2px solid $border;
+        background-color: transparent;
+        color: $copy;
+    }
 }
