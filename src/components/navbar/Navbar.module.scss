@@ -8,6 +8,11 @@
     left: 0;
     z-index: 100;
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+
+    @include respond(tab) {
+        padding: $def-space 0;
+    }
 
     &__wrapper {
         display: flex;
@@ -17,15 +22,19 @@
 
     &__linkList,
     &__paramsList {
-        // @include respond(tab) {
-        //     background-color: red;
-        // }
+        @include respond(tab) {
+            display: none;
+        }
     }
 
     &__linkList {
         padding: $def-space calc($def-space * 3);
         border-radius: 0px 0px 20px 20px;
         overflow: hidden;
+
+        @include respond(tab) {
+            padding: 0;
+        }
     }
 
     &__linkItem,
@@ -93,6 +102,63 @@
 
         &:hover > i {
             color: $primary-content;
+        }
+    }
+
+    // Small devices
+    &__menu {
+        display: none;
+
+        @include respond(tab) {
+            display: block;
+            font-size: $text-size-xl;
+            cursor: pointer;
+        }
+
+        &__listsContainer {
+            display: none;
+
+            @include respond(tab) {
+                width: 25rem;
+                padding: calc($def-space * 2) $def-space;
+                background-color: $fg;
+                border-radius: 5px;
+                display: block;
+                position: absolute;
+                top: 1.5rem;
+                right: 1.7rem;
+                overflow: hidden;
+            }
+        }
+
+        &__closeMenu{
+            font-size: $text-size-xl;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        &__heading {
+            margin-bottom: $def-space;
+            font-size: $text-size-xl;
+        }
+
+        &__linkItem {
+            padding-left: $def-space;
+
+            &:not(:last-child) {
+                margin-bottom: calc($def-space / 1.5);
+            }
+        }
+
+        &__link:link,
+        &__link:visited {
+            padding: 0 0.5rem;
+            color: $copy;
+            font-weight: 400;
+            position: relative;
+            z-index: 5;
         }
     }
 }

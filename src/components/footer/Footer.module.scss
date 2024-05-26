@@ -1,12 +1,25 @@
 @import "../../sass/abstracts/variables";
+@import "../../sass/abstracts/mixins";
 
 .footer{
     padding: calc($def-space * 7);
     text-align: center;
     background-color: $fg;
+
+    @include respond(ph-l){
+        padding: calc($def-space * 7) calc($def-space * 2);
+    }
+
+    @include respond(ph){
+        padding: calc($def-space * 7) 0;
+    }
     
     &__heading{
         font-size: $text-size-3xl;
+
+        @include respond(ph-l){
+            font-size: $text-size-2xl;
+        }
     }
 
     &__subHeading{
@@ -20,6 +33,10 @@
         margin: 0 auto;
         width: 75%;
         position: relative;
+
+        @include respond(ph-l){
+            width: 100%;
+        }
     }
 
     &__input{

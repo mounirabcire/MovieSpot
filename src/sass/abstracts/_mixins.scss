@@ -5,7 +5,7 @@
   // Small smartphones
   @if $breakpoint == ph {
     // 0 - 639
-    @media only screen and (max-widht: 39.94em) {
+    @media only screen and (max-width: 39.94em) {
       @content;
     }
   }

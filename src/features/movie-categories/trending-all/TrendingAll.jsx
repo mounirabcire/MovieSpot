@@ -1,18 +1,35 @@
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { randomUniqueNumsSet } from "../../../utils/helper";
 import { getTrendingAll } from "../../../services/trendingAll";
+import { animate } from "../../../utils/motionAnimation";
 
 import styles from "./TrendingAll.module.scss";
 import TrendingImgItem from "./TrendingImgItem";
 import CurrentTrendingImg from "./CurrentTrendingImg";
 import CurrentTrendingContent from "./CurrentTrendingContent";
 
-function TrendingAll({data}) {
-    // const [activeTrend, setActiveTrend] = useState(0);
-    const [fir, sec, thi, fou, fif] = randomUniqueNumsSet(5, 19);
+// Get 5 unique random numbers
+const [fir, sec, thi, fou, fif] = randomUniqueNumsSet(5, 19);
+
+// Animations
+const animateProgressBar = {
+    initial: {
+        width: 0,
+    },
+    animate: {
+        width: "100%",
+        transition: {
+            duration: 7,
+            ease: "linear",
+            repeat: Infinity,
+        },
+    },
+};
+
+function TrendingAll({ data }) {
+    // Hooks
     const [activeTrend, setActiveTrend] = useState(0);
     const [trending_all, setTrendingAll] = useState([
         {
@@ -62,13 +79,6 @@ function TrendingAll({data}) {
         },
     ]);
 
-    function getActiveTrend(activeTrend) {
-        const [currTrend] = trending_all.filter(
-            tr => tr.dataNum === activeTrend
-        );
-        return currTrend;
-    }
-
     useEffect(() => {
         const set = setTimeout(() => {
             setTrendingAll(currState => {
@@ -91,21 +101,19 @@ function TrendingAll({data}) {
         return () => clearInterval(set);
     }, []);
 
+    // Functions
+    function getActiveTrend(activeTrend) {
+        const [currTrend] = trending_all.filter(
+            tr => tr.dataNum === activeTrend
+        );
+        return currTrend;
+    }
+
     return (
         <div className={styles.trending}>
             <motion.div
-                initial={{
-                    width: 0,
-                }}
-                animate={{
-                    width: "100%",
-                    transition: {
-                        duration: 7,
-                        ease: "linear",
-                        repeat: Infinity,
-                    },
-                }}
                 className={styles.trending__progressBar}
+                {...animate(animateProgressBar)}
             />
 
             <AnimatePresence initial={false}>

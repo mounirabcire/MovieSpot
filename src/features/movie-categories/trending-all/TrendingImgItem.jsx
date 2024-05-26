@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+
+import { animate } from "../../../utils/motionAnimation";
 import { BASE_IMG } from "../../../services/apiInfo";
 import styles from "./TrendingAll.module.scss";
 
@@ -6,17 +8,22 @@ function TrendingImgItem({
     trend: { title, rate, img, dataNum },
     currentTrending,
 }) {
+    // Animations
+    const animateImg = {
+        animate: {
+            width: dataNum === currentTrending ? 0 : "12.5rem",
+            transition: {
+                duration: 0.2,
+                delay: 0.2,
+                ease: [0.5, 1, 0.89, 1],
+            },
+        },
+    };
+
     return (
         <motion.div
             className={styles.trending__imgContainer}
-            animate={{
-                width: dataNum === currentTrending ? 0 : "12.5rem",
-                transition: {
-                    duration: 0.2,
-                    delay: 0.2,
-                    ease: [0.5, 1, 0.89, 1]
-                },
-            }}
+            {...animate(animateImg)}
         >
             <img
                 src={`${BASE_IMG}/w500/${img}`}

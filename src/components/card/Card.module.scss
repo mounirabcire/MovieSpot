@@ -1,6 +1,7 @@
-@import '../../sass/abstracts/variables';
+@import "../../sass/abstracts/variables";
+@import "../../sass/abstracts/mixins";
 
-.cardsContainer{
+.cardsContainer {
     margin-block: calc($def-space / 2);
     display: flex;
     flex-wrap: wrap;
@@ -11,6 +12,21 @@
     width: 18.5rem;
     height: 15rem;
     position: relative;
+
+    @include respond(tab) {
+        width: 25rem;
+        height: 17rem;
+    }
+
+    @include respond(ph-l){
+        width: 45%;
+        height: 20rem;
+    }
+
+    @include respond(ph){
+        margin: 0 auto;
+        width: 80%;
+    }
 
     &__img {
         width: 100%;
@@ -27,8 +43,9 @@
         min-height: 40%;
         padding: 1rem 0.75rem;
         border-radius: 15px 15px 5px 5px;
-        background-color: rgba($black, 0.4);
-        backdrop-filter: blur(2.5px);
+        background-color: rgba($black, 0.3);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
         color: $copy-light;
         display: flex;
         flex-direction: column;
@@ -37,13 +54,17 @@
         position: absolute;
         bottom: 0;
         left: 0;
-        
-        &_title{
+
+        &_title {
             font-size: $text-size-md;
             margin-bottom: calc($def-space / 4);
+
+            @include respond(tab){
+                font-size: $text-size-lg;
+            }
         }
 
-        &_ratesInfo{
+        &_ratesInfo {
             width: 100%;
             display: flex;
             justify-content: space-between;
@@ -55,8 +76,8 @@
             font-size: $text-size-md;
         }
 
-        &_rateCount{
-            padding-left: .7rem;
+        &_rateCount {
+            padding-left: 0.7rem;
             font-size: $text-size-md;
             border-left: 1px solid $copy-light;
         }

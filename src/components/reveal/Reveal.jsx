@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
+
 import styles from "./Reveal.module.scss";
 
 function Reveal({ children }) {
+    // Hooks
     const ref = useRef(null);
     const isInview = useInView(ref, { once: true, margin:'-10px' });
     const control = useAnimation();

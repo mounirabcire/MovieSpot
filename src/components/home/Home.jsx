@@ -1,16 +1,15 @@
 import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
+
 import TrendingAll from "../../features/movie-categories/trending-all/TrendingAll";
 import Container from "../container/Container";
 import styles from "./Home.module.scss";
 import CardList from "../card/CardList";
-import { useState } from "react";
 import Reveal from "../reveal/Reveal";
 import Button from "../button/Button";
-import Footer from "../footer/Footer";
 
 function Home() {
     const { results: data } = useLoaderData();
-    console.log(data);
     const [maxRowData, setMaxRowData] = useState(6);
     const trendingMovies = data.filter(movie => movie.media_type === "movie");
     const trendingTvs = data.filter(movie => movie.media_type === "tv");

@@ -9,7 +9,7 @@ function CardItem({ data }) {
     return (
         <div className={styles.card}>
             <img
-                src={`${BASE_IMG}/w500/${backdrop_path}`}
+                src={`${BASE_IMG}/original/${backdrop_path}`}
                 alt="Trending"
                 className={styles.card__img}
             />
