@@ -5,7 +5,7 @@ import MaxTxtLength from "../max-text-length/MaxTxtLength";
 import Reveal from "../reveal/Reveal";
 import styles from "./Card.module.scss";
 
-function CardItem({ data }) {
+function CardItem({ data, page }) {
     // Hooks
     const navigate = useNavigate();
 
@@ -22,14 +22,14 @@ function CardItem({ data }) {
 
     // Functions
     function handleNavigate() {
-        navigate(`/details/${id}?media_type=${media_type}`);
+        navigate(`/details/${id}?media_type=${media_type ?? page}`);
     }
 
     return (
         <div className={styles.card} onClick={handleNavigate}>
             <img
                 src={`${BASE_IMG}/original/${backdrop_path}`}
-                alt="Trending"
+                alt="Movie"
                 className={styles.card__img}
             />
             <div className={styles.card__imgInfo}>

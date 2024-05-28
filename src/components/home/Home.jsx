@@ -3,27 +3,30 @@ import { useState } from "react";
 
 import { getTrendingAll } from "../../services/trendingAll";
 
-import TrendingAll from "../../features/movie-categories/trending-all/TrendingAll";
 import Container from "../container/Container";
 import styles from "./Home.module.scss";
 import CardList from "../card/CardList";
 import Reveal from "../reveal/Reveal";
 import Button from "../button/Button";
+import Header from "../header/Header";
+import TrendingAll from "../../features/movie-categories/trending-all/TrendingAll";
 
 function Home() {
     const { results: data } = useLoaderData();
-    const [maxRowData, setMaxRowData] = useState(6);
+    const [maxRowData, setMaxRowData] = useState({ movies: 6, tvs: 6 });
     const trendingMovies = data.filter(movie => movie.media_type === "movie");
     const trendingTvs = data.filter(movie => movie.media_type === "tv");
 
-    function updateMaxRowData(dataNum) {
-        setMaxRowData(prev => prev + dataNum);
+    function updateMaxRowData(dataNum, type) {
+        setMaxRowData(prev => ({ ...prev, [type]: prev[type] + dataNum }));
     }
 
     return (
         <>
             <header className={styles.header}>
-                <TrendingAll data={data} />
+                <TrendingAll>
+                    <Header data={data} />
+                </TrendingAll>
             </header>
             <main className={styles.main}>
                 <Container>
@@ -35,9 +38,9 @@ function Home() {
                         </Reveal>
                         <CardList
                             arrayData={trendingMovies}
-                            maxRowData={maxRowData}
+                            maxRowData={maxRowData.movies}
                         />
-                        {trendingMovies.length <= maxRowData ? (
+                        {trendingMovies.length <= maxRowData.movies ? (
                             <Button
                                 style={{ cursor: "not-allowed" }}
                                 disabled={true}
@@ -45,7 +48,9 @@ function Home() {
                                 See more
                             </Button>
                         ) : (
-                            <Button onClick={() => updateMaxRowData(6)}>
+                            <Button
+                                onClick={() => updateMaxRowData(6, "movies")}
+                            >
                                 See more
                             </Button>
                         )}
@@ -58,9 +63,9 @@ function Home() {
                         </Reveal>
                         <CardList
                             arrayData={trendingTvs}
-                            maxRowData={maxRowData}
+                            maxRowData={maxRowData.tvs}
                         />
-                        {trendingTvs.length <= maxRowData ? (
+                        {trendingTvs.length <= maxRowData.tvs ? (
                             <Button
                                 style={{ cursor: "not-allowed" }}
                                 disabled={true}
@@ -68,7 +73,7 @@ function Home() {
                                 See more
                             </Button>
                         ) : (
-                            <Button onClick={() => updateMaxRowData(6)}>
+                            <Button onClick={() => updateMaxRowData(6, "tvs")}>
                                 See more
                             </Button>
                         )}
@@ -78,7 +83,6 @@ function Home() {
         </>
     );
 }
-
 
 export async function loader() {
     const trending_all = await getTrendingAll();

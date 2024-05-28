@@ -2,10 +2,12 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import Home, { loader as loaderTrendingAll } from "./components/home/Home";
 import { loader as loaderDetails } from "./features/movie-details/Details";
+import { loader as loaderMovies } from "./features/movie-categories/movies/moviespage/Movies";
 
 import ErrorEl from "./components/error-element/ErrorEl";
 import AppLayout from "./components/app-layout/AppLayout";
 import Details from "./features/movie-details/Details";
+import Movies from "./features/movie-categories/movies/moviespage/Movies";
 
 // TODO: Add a feature on the Navbar component(using isInView hook).
 
@@ -22,7 +24,8 @@ function App() {
                 },
                 {
                     path: "/movies",
-                    element: <h1>Movies</h1>,
+                    element: <Movies />,
+                    loader: loaderMovies,
                 },
                 {
                     path: "/details/:id",

@@ -1,13 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
-import Button from "../../../components/button/Button";
-import MaxTxtLength from "../../../components/max-text-length/MaxTxtLength";
-import Reveal from "../../../components/reveal/Reveal";
-import styles from "./TrendingAll.module.scss";
+import Button from "../button/Button";
+import MaxTxtLength from "../max-text-length/MaxTxtLength";
+import Reveal from "../reveal/Reveal";
+import styles from "./Header.module.scss";
 
-function CurrentTrendingContent({
-    trend: { title, overview, id, media_type },
-}) {
+function HeaderCurrContent({ trend: { title, overview, id, media_type } }) {
     // Hooks
     const navigate = useNavigate();
 
@@ -17,7 +15,7 @@ function CurrentTrendingContent({
     }
 
     return (
-        <div className={styles.trending__active__box}>
+        <div className={styles.header__active__box}>
             <Reveal>
                 <h2>{title}</h2>
             </Reveal>
@@ -26,7 +24,7 @@ function CurrentTrendingContent({
                     <MaxTxtLength maxLength={332}>{overview}</MaxTxtLength>
                 </p>
             </Reveal>
-            <div className={styles.trending__btns}>
+            <div className={styles.header__btns}>
                 <Button type="primary">Watch trailer</Button>
                 <Button type="secondary" onClick={handleNavigate}>
                     See details
@@ -36,4 +34,4 @@ function CurrentTrendingContent({
     );
 }
 
-export default CurrentTrendingContent;
+export default HeaderCurrContent;

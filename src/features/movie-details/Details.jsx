@@ -25,8 +25,10 @@ function Details() {
     } = data.data;
     const title = data.data?.title ?? data.data?.name;
     const date = data.data?.release_date ?? data.data?.first_air_date;
+
     const { backdrops } = data.data_imgs;
     const img_s = backdrops[0].file_path;
+    
     const videos_num = data.data_videos.results.length;
     const [vid1, vid2] = data.data_videos.results;
 

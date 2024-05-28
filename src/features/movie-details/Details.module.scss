@@ -115,7 +115,7 @@
         }
 
         &__ratesInfo {
-            margin-top: calc($def-space / 2);
+            margin-block: calc($def-space / 2);
             width: 100%;
             display: flex;
             gap: calc($def-space / 2 );
@@ -124,7 +124,6 @@
 
         &__rateCount {
             padding-left: 0.7rem;
-            margin-bottom: calc($def-space / 2);
         }
     }
 

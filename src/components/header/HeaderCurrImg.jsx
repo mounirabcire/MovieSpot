@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 
-import { animate } from "../../../utils/motionAnimation";
-import { BASE_IMG } from "../../../services/apiInfo";
-import styles from "./TrendingAll.module.scss";
+import { animate } from "../../utils/motionAnimation";
+import { BASE_IMG } from "../../services/apiInfo";
+import styles from "./Header.module.scss";
 
 // Animations
 const animateBg = {
@@ -13,7 +13,7 @@ const animateBg = {
         },
     },
 };
-const animateTrendingImg = {
+const animateHeaderImg = {
     animate: {
         width: "100%",
         height: "100%",
@@ -32,21 +32,21 @@ const animateTrendingImg = {
     },
 };
 
-function CurrentTrendingImg({ trend: { img_lg } }) {
+function HeaderCurrImg({ trend: { img_lg } }) {
     return (
         <>
             <motion.div
-                className={styles.trending__bg}
+                className={styles.header__bg}
                 {...animate(animateBg)}
             />
             <motion.img
                 src={`${BASE_IMG}/original/${img_lg}`}
-                alt="Trending"
-                className={styles.trending__img__active}
-                {...animate(animateTrendingImg)}
+                alt="Movie"
+                className={styles.header__img__active}
+                {...animate(animateHeaderImg)}
             />
         </>
     );
 }
 
-export default CurrentTrendingImg;
+export default HeaderCurrImg;
