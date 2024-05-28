@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { randomUniqueNumsSet } from "../../../utils/helper";
-import { getTrendingAll } from "../../../services/trendingAll";
 import { animate } from "../../../utils/motionAnimation";
 
 import styles from "./TrendingAll.module.scss";
@@ -39,6 +38,7 @@ function TrendingAll({ data }) {
             title: data[fir]?.name ?? data[fir].title,
             rate: data[fir].vote_average,
             overview: data[fir].overview,
+            media_type: data[fir].media_type,
             dataNum: 0,
         },
         {
@@ -48,6 +48,7 @@ function TrendingAll({ data }) {
             title: data[sec]?.name ?? data[sec].title,
             rate: data[sec].vote_average,
             overview: data[sec].overview,
+            media_type: data[sec].media_type,
             dataNum: 1,
         },
         {
@@ -57,6 +58,7 @@ function TrendingAll({ data }) {
             title: data[thi]?.name ?? data[thi].title,
             rate: data[thi].vote_average,
             overview: data[thi].overview,
+            media_type: data[thi].media_type,
             dataNum: 2,
         },
         {
@@ -66,6 +68,7 @@ function TrendingAll({ data }) {
             title: data[fou]?.name ?? data[fou].title,
             rate: data[fou].vote_average,
             overview: data[fou].overview,
+            media_type: data[fou].media_type,
             dataNum: 3,
         },
         {
@@ -75,6 +78,7 @@ function TrendingAll({ data }) {
             title: data[fif]?.name ?? data[fif].title,
             rate: data[fif].vote_average,
             overview: data[fif].overview,
+            media_type: data[fif].media_type,
             dataNum: 4,
         },
     ]);
@@ -146,12 +150,6 @@ function TrendingAll({ data }) {
             </AnimatePresence>
         </div>
     );
-}
-
-export async function loader() {
-    const trending_all = await getTrendingAll();
-
-    return trending_all;
 }
 
 export default TrendingAll;

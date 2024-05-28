@@ -11,7 +11,14 @@
 .card {
     width: 18.5rem;
     height: 15rem;
+    border-radius: 5px;
+    overflow: hidden;
+    cursor: pointer;
     position: relative;
+
+    &:hover &__img{
+        scale: 1.1;
+    }
 
     @include respond(tab) {
         width: 25rem;
@@ -36,6 +43,7 @@
         position: absolute;
         top: 0;
         left: 0;
+        transition: all .3s;
     }
 
     &__imgInfo {

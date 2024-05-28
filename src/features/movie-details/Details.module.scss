@@ -1,0 +1,169 @@
+@import "../../sass/abstracts/variables";
+@import "../../sass/abstracts/mixins";
+
+.details {
+    position: relative;
+
+    &__bg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($black, 0.6);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(7px);
+        z-index: -5;
+    }
+
+    &__img_l {
+        width: 100%;
+        min-height: 100svh;
+        position: absolute;
+        inset: 0;
+        object-fit: cover;
+        z-index: -10;
+    }
+
+    &__sec1 {
+        min-height: 100svh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        @include respond(tab){
+            padding-block: 60px;
+        }
+
+        &__wrapper{
+            // width: 100%;
+            display: flex;
+            gap: $def-space;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            @include respond(tab){
+                flex-direction: column;
+                position: relative;
+                top: 0;
+                left: 0;
+                transform: translate(0);
+            }
+        }
+    }
+
+    &__left {
+        width: 25rem;
+        overflow: hidden;
+        border-radius: 5px;
+
+        @include respond(tab) {
+            width: 40rem;
+            // height: 17rem;
+        }
+    
+        @include respond(ph){
+            margin: 0 auto;
+            width: 85%;
+        }
+    }
+
+    &__img_s {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    &__right{
+        color: $copy-light;
+
+        &__title{
+            margin-bottom: $def-space;
+            color: $copy;
+            font-size: $text-size-xl;
+        }
+
+        &__overview{
+            max-width: 45rem;
+            // column-count: 3;
+            // column-gap: calc($def-space / 4);
+            // column-rule: 1px solid $copy-lighter;
+            // hyphens: auto;
+            line-height: 20px;
+        }
+
+        &__genres , &__langs{
+            margin-block: calc($def-space / 2);
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: calc($def-space / 2);
+        }
+
+        &__genre{
+            padding: .75rem 1rem;
+            border-radius: 5px;
+            border: 1px solid $copy;
+            color: $copy;
+        }
+
+        &__time{
+            margin-block: calc($def-space / 2);
+        }
+
+        &__ratesInfo {
+            margin-top: calc($def-space / 2);
+            width: 100%;
+            display: flex;
+            gap: calc($def-space / 2 );
+            align-items: center;
+        }
+
+        &__rateCount {
+            padding-left: 0.7rem;
+            margin-bottom: calc($def-space / 2);
+        }
+    }
+
+    &__sec2{
+        padding: 1rem 0;
+
+        &__videos{
+            width: 80%;
+            margin: 0 auto;
+
+            
+            @include respond(ph-l){
+                width: 100%;
+            }
+        }
+
+        &__title{
+            margin-bottom: $def-space;
+            font-size: $text-size-xl;
+        }
+
+        &__title2{
+            margin-bottom: $def-space;
+            margin-top: calc($def-space * 2);
+            font-size: $text-size-xl;
+        }
+
+        &__iframe{
+            width: 100%;
+            height: 500px;
+            border-radius: 5px;
+
+            @include respond(tab){
+                height: 370px;
+            }
+
+            @include respond(ph-l){
+                height: 250px;
+            }
+        }
+    }
+}

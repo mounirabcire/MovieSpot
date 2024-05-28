@@ -1,6 +1,8 @@
 import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 
+import { getTrendingAll } from "../../services/trendingAll";
+
 import TrendingAll from "../../features/movie-categories/trending-all/TrendingAll";
 import Container from "../container/Container";
 import styles from "./Home.module.scss";
@@ -40,11 +42,11 @@ function Home() {
                                 style={{ cursor: "not-allowed" }}
                                 disabled={true}
                             >
-                                Load more
+                                See more
                             </Button>
                         ) : (
                             <Button onClick={() => updateMaxRowData(6)}>
-                                Load more
+                                See more
                             </Button>
                         )}
                     </div>
@@ -75,6 +77,13 @@ function Home() {
             </main>
         </>
     );
+}
+
+
+export async function loader() {
+    const trending_all = await getTrendingAll();
+
+    return trending_all;
 }
 
 export default Home;

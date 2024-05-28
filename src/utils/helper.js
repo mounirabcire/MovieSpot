@@ -28,3 +28,11 @@ export function maxTextProvider(text, maxTextLength) {
 
     return text.substr(0, maxTextLength) + "...";
 }
+
+// Convert runtime to Real-time format
+export function convertRuntime(runtime) {
+    const hours = Math.floor(runtime / 60);
+    const minutes = runtime % 60;
+
+    return `${hours}hr ${minutes} min`;
+}

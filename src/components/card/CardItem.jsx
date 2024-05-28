@@ -1,13 +1,32 @@
+import { useNavigate } from "react-router-dom";
+
 import { BASE_IMG } from "../../services/apiInfo";
 import MaxTxtLength from "../max-text-length/MaxTxtLength";
 import Reveal from "../reveal/Reveal";
 import styles from "./Card.module.scss";
 
 function CardItem({ data }) {
-    const { backdrop_path, title, name, vote_average, vote_count } = data;
+    // Hooks
+    const navigate = useNavigate();
+
+    // variables
+    const {
+        backdrop_path,
+        title,
+        name,
+        vote_average,
+        vote_count,
+        id,
+        media_type,
+    } = data;
+
+    // Functions
+    function handleNavigate() {
+        navigate(`/details/${id}?media_type=${media_type}`);
+    }
 
     return (
-        <div className={styles.card}>
+        <div className={styles.card} onClick={handleNavigate}>
             <img
                 src={`${BASE_IMG}/original/${backdrop_path}`}
                 alt="Trending"

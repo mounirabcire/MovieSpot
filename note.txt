@@ -3,3 +3,5 @@
 3- we can wrapp multiple child that we want to animate into AnimatePresence compoenent (The component being removed must be a direct
  descendant of AnimatePresence (direct child).)
 4- using useInview Hook along with useAnimation Hook from framer motion
+5- how to get the query string in a loader
+6-  How to Fetch multiple resources in parallel
