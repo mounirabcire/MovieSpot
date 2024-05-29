@@ -5,3 +5,4 @@
 4- using useInview Hook along with useAnimation Hook from framer motion
 5- how to get the query string in a loader
 6-  How to Fetch multiple resources in parallel
+7- requestAnimationFrame
