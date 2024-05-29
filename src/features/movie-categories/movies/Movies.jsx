@@ -129,6 +129,7 @@ function Movies() {
                         <CardList
                             arrayData={results_upcoming}
                             maxRowData={maxRowData.upcoming}
+                            page="movie"
                         />
                         {results_upcoming.length <= maxRowData.upcoming ? (
                             <Button
