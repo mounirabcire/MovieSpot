@@ -1,14 +1,14 @@
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
-import { getMovies } from "../../../../services/movies";
+import { getMovies } from "../../../services/movies";
 
-import Header from "../../../../components/header/Header";
+import Header from "../../../components/header/Header";
 import styles from "./Movies.module.scss";
-import Container from "../../../../components/container/Container";
-import Reveal from "../../../../components/reveal/Reveal";
-import CardList from "../../../../components/card/CardList";
-import { useState } from "react";
-import Button from "../../../../components/button/Button";
+import Container from "../../../components/container/Container";
+import Reveal from "../../../components/reveal/Reveal";
+import CardList from "../../../components/card/CardList";
+import Button from "../../../components/button/Button";
 
 function Movies() {
     // Hooks

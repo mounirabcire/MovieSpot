@@ -1,8 +1,8 @@
 import { ACCESS, BASE_URL } from "./apiInfo";
 
 // Trending movies
-const MOVIES_TRENDING_PATH = "trending/movie/day";
-const API_URL_TRENDING = `${BASE_URL}/${MOVIES_TRENDING_PATH}`;
+// const MOVIES_TRENDING_PATH = "trending/movie/day";
+// const API_URL_TRENDING = `${BASE_URL}/${MOVIES_TRENDING_PATH}`;
 
 // Now playin movies
 const MOVIES_NOW_PLAYING_PATH = "movie/now_playing";
@@ -28,21 +28,21 @@ const options = {
     },
 };
 
-export async function getTrendingMovies() {
-    try {
-        const response = await fetch(API_URL_TRENDING, options);
-        if (!response.ok) throw new Error("Network response was not ok!");
+// export async function getTrendingMovies() {
+//     try {
+//         const response = await fetch(API_URL_TRENDING, options);
+//         if (!response.ok) throw new Error("Network response was not ok!");
 
-        const data = await response.json();
-        if (data.Response === "False") throw new Error("Movie Not found!");
+//         const data = await response.json();
+//         if (data.Response === "False") throw new Error("Movie Not found!");
 
-        return data;
-    } catch (err) {
-        console.log(err.message);
+//         return data;
+//     } catch (err) {
+//         console.log(err.message);
 
-        return null;
-    }
-}
+//         return null;
+//     }
+// }
 
 export async function getMovies() {
     try {

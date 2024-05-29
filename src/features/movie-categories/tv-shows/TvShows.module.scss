@@ -1,0 +1,21 @@
+@import "../../../sass/abstracts/variables";
+
+.header {
+    height: 100svh;
+    overflow: hidden;
+    position: relative;
+}
+
+.main {
+    padding-block: calc($def-space * 3);
+}
+
+.tvShows {
+    &__popular, &__airingToday, &__topRated {
+        margin-bottom: calc($def-space * 2);
+    }
+
+    &__headingType {
+        font-size: $text-size-xl;
+    }
+}
