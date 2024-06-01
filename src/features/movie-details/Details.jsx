@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate, useSearchParams } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 
+import { animate } from "../../utils/motionAnimation";
 import { getMovieDetails, getTvDetails } from "../../services/details";
 import { BASE_IMG } from "../../services/apiInfo";
 import { convertRuntime } from "../../utils/helper";
@@ -9,15 +11,30 @@ import Button from "../../components/button/Button";
 import styles from "./Details.module.scss";
 import Container from "../../components/container/Container";
 import StarList from "./custom-rating/star-list/StarList";
+import { useFavoriteList } from "../../contexts/FavoriteListContext";
+
+// Animations
+const animateOptions = {
+    initial: { scale: 0, x: "-50%", y: "-50%" },
+    animate: { scale: 1, x: "-50%", y: "-50%" },
+    exit: { scale: 0, x: "-50%", y: "-50%" },
+};
 
 function Details() {
     // Hooks
     const data = useLoaderData();
     const navigate = useNavigate();
     const [maxNumRating, setMaxNumRating] = useState(0);
+    const [isHidden, setIsHidden] = useState(0);
+    const [searchParams] = useSearchParams();
+    const media_type = searchParams.get("media_type");
+    const {
+        functions: { addNewItem },
+    } = useFavoriteList();
 
     // Variables
     const {
+        id,
         overview,
         genres,
         backdrop_path,
@@ -35,9 +52,21 @@ function Details() {
     const videos_num = data.data_videos.results.length;
     const [vid1, vid2] = data.data_videos.results;
 
+    const item = {
+        id,
+        title,
+        backdrop_path,
+        vote_average,
+        vote_count,
+        media_type,
+    };
+
     // Functions
     function handleNavigate() {
         navigate(-1);
+    }
+    function handleOptions(bool) {
+        setIsHidden(bool);
     }
 
     return (
@@ -48,14 +77,37 @@ function Details() {
                 src={`${BASE_IMG}/original${backdrop_path}`}
                 alt="movie details"
             />
-            {/* <div className={styles.details__options}>
-                <h3>Add Your Custom Rating</h3>
-                <StarList
-                    maxNumRating={maxNumRating}
-                    setMaxNumRating={setMaxNumRating}
-                />
-                {maxNumRating !== 0 && <Button type="primary">Favorite</Button>}
-            </div> */}
+            <AnimatePresence mode="wait">
+                {isHidden && (
+                    <motion.div
+                        className={styles.details__options}
+                        {...animate(animateOptions)}
+                    >
+                        <div
+                            className={styles.details__close}
+                            onClick={() => handleOptions(false)}
+                        >
+                            <i className="ri-close-line"></i>
+                        </div>
+                        <h3>Add Your Custom Rating</h3>
+                        <StarList
+                            maxNumRating={maxNumRating}
+                            setMaxNumRating={setMaxNumRating}
+                        />
+                        {maxNumRating !== 0 && (
+                            <Button
+                                type="primary"
+                                onClick={() => {
+                                    addNewItem(item);
+                                    setIsHidden(false);
+                                }}
+                            >
+                                Favorite
+                            </Button>
+                        )}
+                    </motion.div>
+                )}
+            </AnimatePresence>
 
             <section className={styles.details__sec1}>
                 <Container>
@@ -126,6 +178,22 @@ function Details() {
                                     </span>
                                 </p>
                             </div>
+                            {maxNumRating !== 0 && (
+                                <p
+                                    className={
+                                        styles.details__right__customRating
+                                    }
+                                >
+                                    Your rating: {maxNumRating}{" "}
+                                    <span
+                                        className={
+                                            styles.details__right__iconContainer
+                                        }
+                                    >
+                                        <i className="ri-sparkling-2-fill"></i>
+                                    </span>
+                                </p>
+                            )}
                             <Button
                                 type="secondary"
                                 style={{
@@ -142,6 +210,7 @@ function Details() {
                                     marginLeft: "1rem",
                                     padding: ".5rem",
                                 }}
+                                onClick={() => handleOptions(true)}
                             >
                                 <i className="ri-add-large-line"></i>
                             </Button>

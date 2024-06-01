@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
     AnimatePresence,
     motion,
@@ -133,9 +133,14 @@ function Navbar({ handleSearchBar }) {
                         >
                             <i className="ri-search-line"></i>
                         </li>
-                        {/* <li className={styles.nav__paramsItem}>
-                            <i className="ri-heart-line"></i>
-                        </li> */}
+                        <li className={styles.nav__paramsItem}>
+                            <Link
+                                to="/favorite"
+                                className={styles.nav__menu__link}
+                            >
+                                <i className="ri-heart-line"></i>
+                            </Link>
+                        </li>
                     </ul>
 
                     {/* Small devices */}
@@ -212,16 +217,23 @@ function Navbar({ handleSearchBar }) {
                                             </span>
                                             Search
                                         </li>
-                                        {/* <li
+                                        <li
                                             className={
                                                 styles.nav__menu__paramsItem
                                             }
                                         >
-                                            <span>
-                                                <i className="ri-heart-line"></i>
-                                            </span>
-                                            Favorite
-                                        </li> */}
+                                            <Link
+                                                to="/favorite"
+                                                className={
+                                                    styles.nav__menu__link
+                                                }
+                                            >
+                                                <span>
+                                                    <i className="ri-heart-line"></i>
+                                                </span>
+                                                Favorite
+                                            </Link>
+                                        </li>
                                     </ul>
                                 </motion.div>
                             </>

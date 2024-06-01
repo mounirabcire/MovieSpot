@@ -1,0 +1,25 @@
+@import "../../sass/abstracts/variables";
+.main {
+    margin-top: 5rem;
+    padding-block: calc($def-space * 3);
+}
+
+.favList {
+    &__empty{
+        display: inline-block;
+        padding: 1rem;
+        background-color: $warning;
+        border-radius: 5px;
+        color: $warning-content;
+        font-weight: 600;
+        margin-top: $def-space;
+    }
+
+    &__list {
+        margin-bottom: calc($def-space * 2);
+    }
+
+    &__headingType {
+        font-size: $text-size-xl;
+    }
+}

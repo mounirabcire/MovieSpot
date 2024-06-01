@@ -9,9 +9,6 @@ import HeaderCurrImg from "./HeaderCurrImg";
 import HeaderCurrContent from "./HeaderCurrContent";
 import HeaderImgList from "./HeaderImgList";
 
-// Get 5 unique random numbers
-const [fir, sec, thi, fou, fif] = randomUniqueNumsSet(5, 19);
-
 // Animations
 const animateProgressBar = {
     initial: {
@@ -28,6 +25,9 @@ const animateProgressBar = {
 };
 
 function Header({ data, page = "home" }) {
+    // Get 5 unique random numbers
+    const [fir, sec, thi, fou, fif] = randomUniqueNumsSet(5, data.length - 1);
+
     // Hooks
     const [activeData, setActiveData] = useState(0);
     const [randomData, setRandomData] = useState([

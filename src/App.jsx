@@ -12,6 +12,8 @@ import Details from "./features/movie-details/Details";
 import Movies from "./features/movie-categories/movies/Movies";
 import TvShows from "./features/movie-categories/tv-shows/TvShows";
 import SearchedMovies from "./features/searched-movies/SearchedMovies";
+import { FavoriteListProvider } from "./contexts/FavoriteListContext";
+import FavoriteList from "./features/movie-favorite/FavoriteList";
 
 // TODO: Add a feature on the Navbar component(using isInView hook).
 // FIXME: TvShows compoenet > see details producing errors.
@@ -20,7 +22,11 @@ import SearchedMovies from "./features/searched-movies/SearchedMovies";
 function App() {
     const router = createBrowserRouter([
         {
-            element: <AppLayout />,
+            element: (
+                <FavoriteListProvider>
+                    <AppLayout />
+                </FavoriteListProvider>
+            ),
             errorElement: <ErrorEl />,
             children: [
                 {
@@ -47,6 +53,10 @@ function App() {
                     path: "/search",
                     element: <SearchedMovies />,
                     loader: loaderSearchedMovies,
+                },
+                {
+                    path: "/favorite",
+                    element: <FavoriteList />,
                 },
             ],
         },

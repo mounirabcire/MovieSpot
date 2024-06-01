@@ -24,7 +24,15 @@
         z-index: -10;
     }
 
-    &__options{
+    &__close {
+        font-size: $text-size-xl;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        cursor: pointer;
+    }
+
+    &__options {
         width: 30rem;
         height: 20rem;
         background-color: rgba($black, 0.7);
@@ -49,11 +57,11 @@
         align-items: center;
         position: relative;
 
-        @include respond(tab){
+        @include respond(tab) {
             padding-block: 60px;
         }
 
-        &__wrapper{
+        &__wrapper {
             // width: 100%;
             display: flex;
             gap: $def-space;
@@ -62,7 +70,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
 
-            @include respond(tab){
+            @include respond(tab) {
                 flex-direction: column;
                 position: relative;
                 top: 0;
@@ -81,8 +89,8 @@
             width: 40rem;
             // height: 17rem;
         }
-    
-        @include respond(ph){
+
+        @include respond(ph) {
             margin: 0 auto;
             width: 85%;
         }
@@ -95,25 +103,22 @@
         border-radius: 5px;
     }
 
-    &__right{
+    &__right {
         color: $copy-light;
 
-        &__title{
+        &__title {
             margin-bottom: $def-space;
             color: $copy;
             font-size: $text-size-xl;
         }
 
-        &__overview{
+        &__overview {
             max-width: 45rem;
-            // column-count: 3;
-            // column-gap: calc($def-space / 4);
-            // column-rule: 1px solid $copy-lighter;
-            // hyphens: auto;
             line-height: 20px;
         }
 
-        &__genres , &__langs{
+        &__genres,
+        &__langs {
             margin-block: calc($def-space / 2);
             display: flex;
             align-items: center;
@@ -121,14 +126,14 @@
             gap: calc($def-space / 2);
         }
 
-        &__genre{
-            padding: .75rem 1rem;
+        &__genre {
+            padding: 0.75rem 1rem;
             border-radius: 5px;
             border: 1px solid $copy;
             color: $copy;
         }
 
-        &__time{
+        &__time {
             margin-block: calc($def-space / 2);
         }
 
@@ -136,49 +141,52 @@
             margin-block: calc($def-space / 2);
             width: 100%;
             display: flex;
-            gap: calc($def-space / 2 );
+            gap: calc($def-space / 2);
             align-items: center;
         }
 
         &__rateCount {
             padding-left: 0.7rem;
         }
+
+        &__customRating {
+            margin-bottom: calc($def-space / 2);
+        }
     }
 
-    &__sec2{
+    &__sec2 {
         padding: 1rem 0;
 
-        &__videos{
+        &__videos {
             width: 80%;
             margin: 0 auto;
 
-            
-            @include respond(ph-l){
+            @include respond(ph-l) {
                 width: 100%;
             }
         }
 
-        &__title{
+        &__title {
             margin-bottom: $def-space;
             font-size: $text-size-xl;
         }
 
-        &__title2{
+        &__title2 {
             margin-bottom: $def-space;
             margin-top: calc($def-space * 2);
             font-size: $text-size-xl;
         }
 
-        &__iframe{
+        &__iframe {
             width: 100%;
             height: 500px;
             border-radius: 5px;
 
-            @include respond(tab){
+            @include respond(tab) {
                 height: 370px;
             }
 
-            @include respond(ph-l){
+            @include respond(ph-l) {
                 height: 250px;
             }
         }
