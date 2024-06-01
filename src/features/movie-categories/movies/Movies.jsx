@@ -13,7 +13,6 @@ import Button from "../../../components/button/Button";
 function Movies() {
     // Hooks
     const movies = useLoaderData();
-    console.log(movies);
     const {
         data_now_playing: { results: results_now_playing },
         data_popular: { results: results_popular },

@@ -24,6 +24,23 @@
         z-index: -10;
     }
 
+    &__options{
+        width: 55rem;
+        height: 30rem;
+        background-color: rgba($black, 0.7);
+        backdrop-filter: blur(10px);
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 50;
+    }
+
     &__sec1 {
         min-height: 100svh;
         display: flex;

@@ -20,10 +20,6 @@ const links = [
         name: "Tv Shows",
         path: "/tvshows",
     },
-    {
-        name: "Kids",
-        path: "/kids",
-    },
 ];
 
 // Animations
@@ -66,7 +62,7 @@ const animateLinks = {
     }),
 };
 
-function Navbar() {
+function Navbar({ handleSearchBar }) {
     // Hooks
     const [menuIsOpened, setMenuIsOpened] = useState(false);
 
@@ -95,17 +91,14 @@ function Navbar() {
                     </ul>
 
                     <ul className={styles.nav__paramsList}>
-                        <li className={styles.nav__paramsItem}>
+                        <li
+                            className={styles.nav__paramsItem}
+                            onClick={() => handleSearchBar(true)}
+                        >
                             <i className="ri-search-line"></i>
                         </li>
                         <li className={styles.nav__paramsItem}>
                             <i className="ri-heart-line"></i>
-                        </li>
-                        <li className={styles.nav__paramsItem}>
-                            <i className="ri-sun-line"></i>
-                        </li>
-                        <li className={styles.nav__paramsItem}>
-                            <i className="ri-user-line"></i>
                         </li>
                     </ul>
 
@@ -149,6 +142,7 @@ function Navbar() {
                                                     animateLinks,
                                                     i + 1
                                                 )}
+                                                onClick={handleOpenMenu}
                                             >
                                                 <NavLink
                                                     className={
@@ -162,28 +156,37 @@ function Navbar() {
                                         ))}
                                     </motion.ul>
 
-                                    {/* <ul className={styles.nav__menu__paramsList}>
-                                    <li
-                                        className={styles.nav__menu__paramsItem}
+                                    <h3 className={styles.nav__menu__heading}>
+                                        Options
+                                    </h3>
+                                    <ul
+                                        className={styles.nav__menu__paramsList}
                                     >
-                                        <i className="ri-search-line"></i>
-                                    </li>
-                                    <li
-                                        className={styles.nav__menu__paramsItem}
-                                    >
-                                        <i className="ri-heart-line"></i>
-                                    </li>
-                                    <li
-                                        className={styles.nav__menu__paramsItem}
-                                    >
-                                        <i className="ri-sun-line"></i>
-                                    </li>
-                                    <li
-                                        className={styles.nav__menu__paramsItem}
-                                    >
-                                        <i className="ri-user-line"></i>
-                                    </li>
-                                </ul> */}
+                                        <li
+                                            className={
+                                                styles.nav__menu__paramsItem
+                                            }
+                                            onClick={() => {
+                                                handleSearchBar(true);
+                                                handleOpenMenu();
+                                            }}
+                                        >
+                                            <span>
+                                                <i className="ri-search-line"></i>
+                                            </span>
+                                            Search
+                                        </li>
+                                        <li
+                                            className={
+                                                styles.nav__menu__paramsItem
+                                            }
+                                        >
+                                            <span>
+                                                <i className="ri-heart-line"></i>
+                                            </span>
+                                            Favorite
+                                        </li>
+                                    </ul>
                                 </motion.div>
                             </>
                         )}

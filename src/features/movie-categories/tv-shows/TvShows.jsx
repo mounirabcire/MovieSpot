@@ -13,7 +13,6 @@ import Button from "../../../components/button/Button";
 function TvShows() {
     // Hooks
     const tvShows = useLoaderData();
-    console.log(tvShows);
     const {
         data_airing_today: { results: results_airing_today },
         data_popular: { results: results_popular },
@@ -129,6 +128,7 @@ function TvShows() {
                         <CardList
                             arrayData={results_on_the_air}
                             maxRowData={maxRowData.on_the_air}
+                            page='tv'
                         />
                         {results_on_the_air.length <= maxRowData.on_the_air ? (
                             <Button

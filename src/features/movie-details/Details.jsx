@@ -7,6 +7,7 @@ import { convertRuntime } from "../../utils/helper";
 import Button from "../../components/button/Button";
 import styles from "./Details.module.scss";
 import Container from "../../components/container/Container";
+import StarList from "./custom-rating/star-list/StarList";
 
 function Details() {
     // Hooks
@@ -28,7 +29,7 @@ function Details() {
 
     const { backdrops } = data.data_imgs;
     const img_s = backdrops[0].file_path;
-    
+
     const videos_num = data.data_videos.results.length;
     const [vid1, vid2] = data.data_videos.results;
 
@@ -45,6 +46,10 @@ function Details() {
                 src={`${BASE_IMG}/original${backdrop_path}`}
                 alt="movie details"
             />
+            {/* <div className={styles.details__options}>
+                <h3>Add Your Custom Rating</h3>
+                <StarList />
+            </div> */}
 
             <section className={styles.details__sec1}>
                 <Container>
@@ -125,6 +130,15 @@ function Details() {
                             >
                                 Back
                             </Button>
+                            <Button
+                                type="secondary"
+                                style={{
+                                    marginLeft: "1rem",
+                                    padding: ".5rem",
+                                }}
+                            >
+                                <i className="ri-add-large-line"></i>
+                            </Button>
                         </div>
                     </div>
                 </Container>
@@ -134,19 +148,27 @@ function Details() {
                 <Container>
                     <div className={styles.details__sec2__wrapper}>
                         <div className={styles.details__sec2__videos}>
-                            <h3 className={styles.details__sec2__title}>
-                                {vid1.name}
-                            </h3>
-                            <div className={styles.details__sec2__video}>
-                                <iframe
-                                    src={`https://www.youtube.com/embed/${vid1.key}`}
-                                    title="The Stunt That Went Wrong Trailer"
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                    className={styles.details__sec2__iframe}
-                                ></iframe>
-                            </div>
+                            {videos_num !== 0 && (
+                                <>
+                                    <h3 className={styles.details__sec2__title}>
+                                        {vid1.name}
+                                    </h3>
+                                    <div
+                                        className={styles.details__sec2__video}
+                                    >
+                                        <iframe
+                                            src={`https://www.youtube.com/embed/${vid1.key}`}
+                                            title="The Stunt That Went Wrong Trailer"
+                                            frameBorder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                            className={
+                                                styles.details__sec2__iframe
+                                            }
+                                        ></iframe>
+                                    </div>
+                                </>
+                            )}
 
                             {videos_num >= 2 && (
                                 <>
