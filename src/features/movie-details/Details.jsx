@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 
 import { getMovieDetails, getTvDetails } from "../../services/details";
@@ -13,6 +14,7 @@ function Details() {
     // Hooks
     const data = useLoaderData();
     const navigate = useNavigate();
+    const [maxNumRating, setMaxNumRating] = useState(0);
 
     // Variables
     const {
@@ -48,7 +50,11 @@ function Details() {
             />
             {/* <div className={styles.details__options}>
                 <h3>Add Your Custom Rating</h3>
-                <StarList />
+                <StarList
+                    maxNumRating={maxNumRating}
+                    setMaxNumRating={setMaxNumRating}
+                />
+                {maxNumRating !== 0 && <Button type="primary">Favorite</Button>}
             </div> */}
 
             <section className={styles.details__sec1}>

@@ -1,0 +1,8 @@
+@import "../../../../sass/abstracts/variables";
+
+.star {
+    &__list {
+        margin-top: $def-space;
+        margin-bottom: calc($def-space / 2);
+    }
+}

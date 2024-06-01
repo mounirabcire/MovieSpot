@@ -1,10 +1,16 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import {
+    AnimatePresence,
+    motion,
+    useMotionValueEvent,
+    useScroll,
+} from "framer-motion";
+
+import { animate } from "../../utils/motionAnimation";
 
 import styles from "./Navbar.module.scss";
 import Container from "../container/Container";
-import { animate } from "../../utils/motionAnimation";
 
 // Links data
 const links = [
@@ -23,6 +29,15 @@ const links = [
 ];
 
 // Animations
+const hideMenu = {
+    visible: {
+        y: "0",
+    },
+    hidden: {
+        y: "-100%",
+    },
+};
+
 const animateMenu = {
     initial: {
         x: "100%",
@@ -65,14 +80,35 @@ const animateLinks = {
 function Navbar({ handleSearchBar }) {
     // Hooks
     const [menuIsOpened, setMenuIsOpened] = useState(false);
+    const [isHidden, setIsHidden] = useState(false);
+    const { scrollY } = useScroll();
+    useMotionValueEvent(scrollY, "change", latest => {
+        const previous = scrollY.getPrevious();
+
+        if (latest > previous && latest > 150) {
+            handleIsHidden(true);
+            setMenuIsOpened(false);
+        } else handleIsHidden(false);
+    });
 
     // functions
     function handleOpenMenu() {
         setMenuIsOpened(prev => !prev);
     }
+    function handleIsHidden(bool) {
+        setIsHidden(bool);
+    }
 
     return (
-        <nav className={styles.nav}>
+        <motion.nav
+            className={styles.nav}
+            variants={hideMenu}
+            animate={isHidden ? "hidden" : "visible"}
+            transition={{
+                duration: 0.5,
+                ease: "easeInOut",
+            }}
+        >
             <Container>
                 <div className={styles.nav__wrapper}>
                     <h1 className={styles.nav__logo}>MovieSpot</h1>
@@ -97,9 +133,9 @@ function Navbar({ handleSearchBar }) {
                         >
                             <i className="ri-search-line"></i>
                         </li>
-                        <li className={styles.nav__paramsItem}>
+                        {/* <li className={styles.nav__paramsItem}>
                             <i className="ri-heart-line"></i>
-                        </li>
+                        </li> */}
                     </ul>
 
                     {/* Small devices */}
@@ -176,7 +212,7 @@ function Navbar({ handleSearchBar }) {
                                             </span>
                                             Search
                                         </li>
-                                        <li
+                                        {/* <li
                                             className={
                                                 styles.nav__menu__paramsItem
                                             }
@@ -185,7 +221,7 @@ function Navbar({ handleSearchBar }) {
                                                 <i className="ri-heart-line"></i>
                                             </span>
                                             Favorite
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </motion.div>
                             </>
@@ -193,7 +229,7 @@ function Navbar({ handleSearchBar }) {
                     </AnimatePresence>
                 </div>
             </Container>
-        </nav>
+        </motion.nav>
     );
 }
 

@@ -1,4 +1,8 @@
-import { motion } from "framer-motion";
+import {
+    motion,
+    useScroll,
+    useTransform,
+} from "framer-motion";
 
 import { animate } from "../../utils/motionAnimation";
 import { BASE_IMG } from "../../services/apiInfo";
@@ -33,13 +37,17 @@ const animateHeaderImg = {
 };
 
 function HeaderCurrImg({ trend: { img_lg } }) {
+    // Hooks
+    const { scrollYProgress } = useScroll();
+    const scale = useTransform(scrollYProgress, [0, 1], [1, 2]);
+
     return (
         <>
-            <motion.div
-                className={styles.header__bg}
-                {...animate(animateBg)}
-            />
+            <motion.div className={styles.header__bg} {...animate(animateBg)} />
             <motion.img
+                style={{
+                    scale,
+                }}
                 src={`${BASE_IMG}/original/${img_lg}`}
                 alt="Movie"
                 className={styles.header__img__active}

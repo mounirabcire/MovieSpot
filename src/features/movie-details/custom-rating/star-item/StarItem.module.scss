@@ -5,7 +5,12 @@
         display: inline-block;
 
         &:not(:last-child) {
-            margin-right: 0.5rem;
+            margin-right: 1rem;
+        }
+
+        svg{
+            width: 2.4rem;
+            height: 2.4rem;
         }
     }
 }
