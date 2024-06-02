@@ -61,22 +61,6 @@ const animateMenu = {
     },
 };
 
-const animateLinks = {
-    initial: {
-        x: "50px",
-        opacity: 0,
-    },
-    animate: i => ({
-        x: 0,
-        opacity: 1,
-        transition: {
-            delay: i * 0.3,
-            duration: 0.3,
-            ease: [0, 0.55, 0.45, 1],
-        },
-    }),
-};
-
 function Navbar({ handleSearchBar }) {
     // Hooks
     const [menuIsOpened, setMenuIsOpened] = useState(false);
@@ -174,15 +158,11 @@ function Navbar({ handleSearchBar }) {
                                         }}
                                     >
                                         {links.map((link, i) => (
-                                            <motion.li
+                                            <li
                                                 className={
                                                     styles.nav__menu__linkItem
                                                 }
                                                 key={i}
-                                                {...animate(
-                                                    animateLinks,
-                                                    i + 1
-                                                )}
                                                 onClick={handleOpenMenu}
                                             >
                                                 <NavLink
@@ -193,7 +173,7 @@ function Navbar({ handleSearchBar }) {
                                                 >
                                                     {link.name}
                                                 </NavLink>
-                                            </motion.li>
+                                            </li>
                                         ))}
                                     </motion.ul>
 
@@ -221,6 +201,7 @@ function Navbar({ handleSearchBar }) {
                                             className={
                                                 styles.nav__menu__paramsItem
                                             }
+                                            onClick={handleOpenMenu}
                                         >
                                             <Link
                                                 to="/favorite"

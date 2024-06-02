@@ -7,10 +7,11 @@ function StarItem({
     maxNumRating,
     handleClick,
 }) {
+
     return (
         <span
             className={styles.star__item}
-            onClick={handleClick}
+            onClick={() => handleClick()}
             onMouseEnter={() => handleHover(index)}
             onMouseLeave={() => handleHover(0)}
         >

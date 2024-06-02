@@ -12,13 +12,16 @@ function FavoriteList() {
     // Hooks
     const {
         values: { favList },
+        functions: { deleteItem },
     } = useFavoriteList();
-    console.log(favList);
     const [maxRowData, setMaxRowData] = useState(6);
 
     // Functions
     function updateMaxRowData(dataNum) {
         setMaxRowData(prev => prev + dataNum);
+    }
+    function updateMinRowData(dataNum) {
+        setMaxRowData(prev => prev - dataNum);
     }
 
     if (favList.length === 0)
@@ -52,6 +55,7 @@ function FavoriteList() {
                         arrayData={favList}
                         maxRowData={maxRowData}
                         page="movie"
+                        isFavpage={true}
                     />
                     {favList.length <= maxRowData ? (
                         <Button
@@ -63,6 +67,14 @@ function FavoriteList() {
                     ) : (
                         <Button onClick={() => updateMaxRowData(6)}>
                             See more
+                        </Button>
+                    )}
+                    {maxRowData > 6 && (
+                        <Button
+                            style={{ marginLeft: "1rem" }}
+                            onClick={() => updateMinRowData(6)}
+                        >
+                            See less
                         </Button>
                     )}
                 </div>

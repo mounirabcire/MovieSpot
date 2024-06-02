@@ -12,13 +12,27 @@ import Header from "../header/Header";
 import TrendingAll from "../../features/movie-categories/trending-all/TrendingAll";
 
 function Home() {
+    // Hooks
     const { results: data } = useLoaderData();
     const [maxRowData, setMaxRowData] = useState({ movies: 6, tvs: 6 });
-    const trendingMovies = data.filter(movie => movie.media_type === "movie");
-    const trendingTvs = data.filter(movie => movie.media_type === "tv");
 
+    // Derive states
+    const trendingMovies = data.filter(
+        movie =>
+            movie.media_type === "movie" &&
+            Boolean(movie.backdrop_path) !== false
+    );
+    const trendingTvs = data.filter(
+        movie =>
+            movie.media_type === "tv" && Boolean(movie.backdrop_path) !== false
+    );
+
+    // Functions
     function updateMaxRowData(dataNum, type) {
         setMaxRowData(prev => ({ ...prev, [type]: prev[type] + dataNum }));
+    }
+    function updateMinRowData(dataNum, type) {
+        setMaxRowData(prev => ({ ...prev, [type]: prev[type] - dataNum }));
     }
 
     return (
@@ -54,6 +68,16 @@ function Home() {
                                 See more
                             </Button>
                         )}
+                          {maxRowData.movies > 6 && (
+                            <Button
+                                style={{ marginLeft: "1rem" }}
+                                onClick={() =>
+                                    updateMinRowData(6, "movies")
+                                }
+                            >
+                                See less
+                            </Button>
+                        )}
                     </div>
                     <div className={styles.trending__tvs}>
                         <Reveal>
@@ -75,6 +99,16 @@ function Home() {
                         ) : (
                             <Button onClick={() => updateMaxRowData(6, "tvs")}>
                                 See more
+                            </Button>
+                        )}
+                          {maxRowData.tvs > 6 && (
+                            <Button
+                                style={{ marginLeft: "1rem" }}
+                                onClick={() =>
+                                    updateMinRowData(6, "tvs")
+                                }
+                            >
+                                See less
                             </Button>
                         )}
                     </div>

@@ -1,0 +1,31 @@
+@import '../../sass/abstracts/variables';
+@import '../../sass/abstracts/mixins';
+
+.error{
+    &__container{
+        height: 100svh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__img{
+        width: 45rem;
+        height: 45rem;
+
+        @include respond(ph){
+            width: 95%;
+            height: auto;
+        }
+    }
+
+    &__message{
+        padding: 1rem;
+        border-radius: 5px;
+        // background-color: $error;
+        // color: $error-content;
+        font-size: $text-size-xl;
+        font-weight: 700;
+    }
+}

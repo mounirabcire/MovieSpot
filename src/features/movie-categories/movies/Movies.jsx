@@ -30,6 +30,9 @@ function Movies() {
     function updateMaxRowData(dataNum, type) {
         setMaxRowData(prev => ({ ...prev, [type]: prev[type] + dataNum }));
     }
+    function updateMinRowData(dataNum, type) {
+        setMaxRowData(prev => ({ ...prev, [type]: prev[type] - dataNum }));
+    }
 
     return (
         <>
@@ -58,12 +61,24 @@ function Movies() {
                                 See more
                             </Button>
                         ) : (
+                            <>
+                                <Button
+                                    onClick={() =>
+                                        updateMaxRowData(6, "now_playing")
+                                    }
+                                >
+                                    See more
+                                </Button>
+                            </>
+                        )}
+                        {maxRowData.now_playing > 6 && (
                             <Button
+                                style={{ marginLeft: "1rem" }}
                                 onClick={() =>
-                                    updateMaxRowData(6, "now_playing")
+                                    updateMinRowData(6, "now_playing")
                                 }
                             >
-                                See more
+                                See less
                             </Button>
                         )}
                     </div>
@@ -92,6 +107,14 @@ function Movies() {
                                 See more
                             </Button>
                         )}
+                        {maxRowData.top_rated > 6 && (
+                            <Button
+                                style={{ marginLeft: "1rem" }}
+                                onClick={() => updateMinRowData(6, "top_rated")}
+                            >
+                                See less
+                            </Button>
+                        )}
                     </div>
                     <div className={styles.movies__popular}>
                         <Reveal>
@@ -118,6 +141,14 @@ function Movies() {
                                 See more
                             </Button>
                         )}
+                        {maxRowData.popular > 6 && (
+                            <Button
+                                style={{ marginLeft: "1rem" }}
+                                onClick={() => updateMinRowData(6, "popular")}
+                            >
+                                See less
+                            </Button>
+                        )}
                     </div>
                     <div className={styles.movies__upcoming}>
                         <Reveal>
@@ -142,6 +173,14 @@ function Movies() {
                                 onClick={() => updateMaxRowData(6, "upcoming")}
                             >
                                 See more
+                            </Button>
+                        )}
+                        {maxRowData.upcoming > 6 && (
+                            <Button
+                                style={{ marginLeft: "1rem" }}
+                                onClick={() => updateMinRowData(6, "upcoming")}
+                            >
+                                See less
                             </Button>
                         )}
                     </div>

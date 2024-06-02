@@ -30,6 +30,9 @@ function TvShows() {
     function updateMaxRowData(dataNum, type) {
         setMaxRowData(prev => ({ ...prev, [type]: prev[type] + dataNum }));
     }
+    function updateMinRowData(dataNum, type) {
+        setMaxRowData(prev => ({ ...prev, [type]: prev[type] - dataNum }));
+    }
 
     return (
         <>
@@ -66,6 +69,16 @@ function TvShows() {
                                 See more
                             </Button>
                         )}
+                        {maxRowData.airing_today > 6 && (
+                            <Button
+                                style={{ marginLeft: "1rem" }}
+                                onClick={() =>
+                                    updateMinRowData(6, "airing_today")
+                                }
+                            >
+                                See less
+                            </Button>
+                        )}
                     </div>
                     <div className={styles.tvShows__topRated}>
                         <Reveal>
@@ -90,6 +103,14 @@ function TvShows() {
                                 onClick={() => updateMaxRowData(6, "top_rated")}
                             >
                                 See more
+                            </Button>
+                        )}
+                        {maxRowData.top_rated > 6 && (
+                            <Button
+                                style={{ marginLeft: "1rem" }}
+                                onClick={() => updateMinRowData(6, "top_rated")}
+                            >
+                                See less
                             </Button>
                         )}
                     </div>
@@ -118,6 +139,14 @@ function TvShows() {
                                 See more
                             </Button>
                         )}
+                        {maxRowData.popular > 6 && (
+                            <Button
+                                style={{ marginLeft: "1rem" }}
+                                onClick={() => updateMinRowData(6, "popular")}
+                            >
+                                See less
+                            </Button>
+                        )}
                     </div>
                     <div className={styles.tvShows__on_the_air}>
                         <Reveal>
@@ -128,7 +157,7 @@ function TvShows() {
                         <CardList
                             arrayData={results_on_the_air}
                             maxRowData={maxRowData.on_the_air}
-                            page='tv'
+                            page="tv"
                         />
                         {results_on_the_air.length <= maxRowData.on_the_air ? (
                             <Button
@@ -144,6 +173,16 @@ function TvShows() {
                                 }
                             >
                                 See more
+                            </Button>
+                        )}
+                        {maxRowData.on_the_air > 6 && (
+                            <Button
+                                style={{ marginLeft: "1rem" }}
+                                onClick={() =>
+                                    updateMinRowData(6, "on_the_air")
+                                }
+                            >
+                                See less
                             </Button>
                         )}
                     </div>

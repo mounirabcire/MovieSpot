@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { ACCESS, BASE_URL } from "../../services/apiInfo";
 
@@ -12,6 +12,7 @@ function SearchBar({ handleSearchBar }) {
     const [search, setSearch] = useState("");
     const [searchedData, setSearchedData] = useState([]);
     const navigate = useNavigate();
+    const ref = useRef(null);
 
     useEffect(() => {
         if (search.trim() !== "") {
@@ -61,11 +62,15 @@ function SearchBar({ handleSearchBar }) {
         }
     }, [search]);
 
+    useEffect(() => {
+        ref.current.focus();
+    }, []);
+
     // Functions
     function handleNavigate() {
         if (search.trim() !== "") {
             handleSearchBar(false);
-            navigate(`/search?query=${search}`);
+            navigate(`/search?query=${search.trim()}`);
         } else {
             setSearch("");
         }
@@ -94,6 +99,7 @@ function SearchBar({ handleSearchBar }) {
                     onChange={e => setSearch(e.target.value)}
                     className={styles.searchbar__input}
                     placeholder="Search..."
+                    ref={ref}
                 />
 
                 <Button

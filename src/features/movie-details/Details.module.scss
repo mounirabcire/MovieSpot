@@ -151,6 +151,10 @@
 
         &__customRating {
             margin-bottom: calc($def-space / 2);
+            background-color: $secondary;
+            color: $secondary-content;
+            padding: .5rem;
+            border-radius: 5px;
         }
     }
 

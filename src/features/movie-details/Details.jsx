@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useLoaderData, useNavigate, useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
+import { useFavoriteList } from "../../contexts/FavoriteListContext";
 import { animate } from "../../utils/motionAnimation";
 import { getMovieDetails, getTvDetails } from "../../services/details";
 import { BASE_IMG } from "../../services/apiInfo";
@@ -11,7 +12,6 @@ import Button from "../../components/button/Button";
 import styles from "./Details.module.scss";
 import Container from "../../components/container/Container";
 import StarList from "./custom-rating/star-list/StarList";
-import { useFavoriteList } from "../../contexts/FavoriteListContext";
 
 // Animations
 const animateOptions = {
@@ -93,6 +93,7 @@ function Details() {
                         <StarList
                             maxNumRating={maxNumRating}
                             setMaxNumRating={setMaxNumRating}
+                            movieId={id}
                         />
                         {maxNumRating !== 0 && (
                             <Button
@@ -100,6 +101,7 @@ function Details() {
                                 onClick={() => {
                                     addNewItem(item);
                                     setIsHidden(false);
+                                    navigate("/favorite");
                                 }}
                             >
                                 Favorite
@@ -184,13 +186,13 @@ function Details() {
                                         styles.details__right__customRating
                                     }
                                 >
-                                    Your rating: {maxNumRating}{" "}
+                                    Your rating: {maxNumRating}
                                     <span
                                         className={
                                             styles.details__right__iconContainer
                                         }
                                     >
-                                        <i className="ri-sparkling-2-fill"></i>
+                                        <i className="ri-star-s-fill"></i>
                                     </span>
                                 </p>
                             )}

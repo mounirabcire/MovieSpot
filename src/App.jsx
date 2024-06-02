@@ -14,6 +14,7 @@ import TvShows from "./features/movie-categories/tv-shows/TvShows";
 import SearchedMovies from "./features/searched-movies/SearchedMovies";
 import { FavoriteListProvider } from "./contexts/FavoriteListContext";
 import FavoriteList from "./features/movie-favorite/FavoriteList";
+import { RatedMoviesProvider } from "./contexts/RatedMoviesContext";
 
 // TODO: Add a feature on the Navbar component(using isInView hook).
 // FIXME: TvShows compoenet > see details producing errors.
@@ -24,7 +25,9 @@ function App() {
         {
             element: (
                 <FavoriteListProvider>
-                    <AppLayout />
+                    <RatedMoviesProvider>
+                        <AppLayout />
+                    </RatedMoviesProvider>
                 </FavoriteListProvider>
             ),
             errorElement: <ErrorEl />,
