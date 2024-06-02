@@ -33,32 +33,32 @@ function App() {
             errorElement: <ErrorEl />,
             children: [
                 {
-                    path: "/",
+                    path: "/MovieSport/",
                     element: <Home />,
                     loader: loaderTrendingAll,
                 },
                 {
-                    path: "/movies",
+                    path: "/MovieSport/movies",
                     element: <Movies />,
                     loader: loaderMovies,
                 },
                 {
-                    path: "/tvshows",
+                    path: "/MovieSport/tvshows",
                     element: <TvShows />,
                     loader: loaderTvShows,
                 },
                 {
-                    path: "/details/:id",
+                    path: "/MovieSport/details/:id",
                     element: <Details />,
                     loader: loaderDetails,
                 },
                 {
-                    path: "/search",
+                    path: "/MovieSport/search",
                     element: <SearchedMovies />,
                     loader: loaderSearchedMovies,
                 },
                 {
-                    path: "/favorite",
+                    path: "/MovieSport/favorite",
                     element: <FavoriteList />,
                 },
             ],
