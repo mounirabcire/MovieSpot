@@ -7,6 +7,7 @@ import CardList from "../../components/card/CardList";
 import Container from "../../components/container/Container";
 import Reveal from "../../components/reveal/Reveal";
 import styles from "./FavoriteList.module.scss";
+import { useNavigate } from "react-router-dom";
 
 function FavoriteList() {
     // Hooks
@@ -15,6 +16,7 @@ function FavoriteList() {
         functions: { deleteItem },
     } = useFavoriteList();
     const [maxRowData, setMaxRowData] = useState(6);
+    const navigate = useNavigate();
 
     // Functions
     function updateMaxRowData(dataNum) {
@@ -28,6 +30,7 @@ function FavoriteList() {
         return (
             <main className={styles.main}>
                 <Container>
+                    <Button onClick={() => navigate(-1)}>Back</Button>
                     <div className={styles.faveList__list}>
                         <Reveal>
                             <h3 className={styles.favList__headingType}>
@@ -46,6 +49,7 @@ function FavoriteList() {
         <main className={styles.main}>
             <Container>
                 <div className={styles.faveList__list}>
+                    <Button onClick={() => navigate(-1)}>Back</Button>
                     <Reveal>
                         <h3 className={styles.favList__headingType}>
                             Your Favorite List

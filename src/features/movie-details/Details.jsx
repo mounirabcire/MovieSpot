@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLoaderData, useNavigate, useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -12,6 +12,7 @@ import Button from "../../components/button/Button";
 import styles from "./Details.module.scss";
 import Container from "../../components/container/Container";
 import StarList from "./custom-rating/star-list/StarList";
+import { useRatedMovies } from "../../contexts/RatedMoviesContext";
 
 // Animations
 const animateOptions = {
@@ -31,6 +32,10 @@ function Details() {
     const {
         functions: { addNewItem },
     } = useFavoriteList();
+    const {
+        functions: { rateMovie },
+        values: { ratedMovies },
+    } = useRatedMovies();
 
     // Variables
     const {
@@ -52,6 +57,7 @@ function Details() {
     const videos_num = data.data_videos.results.length;
     const [vid1, vid2] = data.data_videos.results;
 
+    const isRated = ratedMovies.some(r => r.id === id);
     const item = {
         id,
         title,
@@ -60,6 +66,25 @@ function Details() {
         vote_count,
         media_type,
     };
+
+    useEffect(()=>{
+        const isRated = ratedMovies.some(r => r.id === id);
+        if(isRated){
+            const rating = ratedMovies.find(r => r.id === id);
+            setMaxNumRating(rating.rating);
+        }
+
+    }, [id, ratedMovies])
+
+    useEffect(() => {
+        if (maxNumRating !== 0) {
+            const item = {
+                id,
+                rating: maxNumRating,
+            };
+            rateMovie(item);
+        }
+    }, [maxNumRating, id, rateMovie]);
 
     // Functions
     function handleNavigate() {

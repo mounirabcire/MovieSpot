@@ -22,27 +22,34 @@ function RatedMoviesProvider({ children }) {
     }, [ratedMovies]);
 
     // Functions
-    function rateMovie(newItem) {
+    const rateMovie = newItem => {
         setRatedMovies(prev => {
-            const itemExist = prev.some(p => p.id === newItem.id);
-            if (itemExist) {
-                return [...prev.filter(p => p.id !== newItem.id), newItem];
+            const itemIndex = prev.findIndex(p => p.id === newItem.id);
+            if (itemIndex > -1) {
+                // If the item already exists and the rating is the same, return the previous state
+                if (prev[itemIndex].rating === newItem.rating) {
+                    return prev;
+                }
+                // Replace the existing item
+                const updatedMovies = [...prev];
+                updatedMovies[itemIndex] = newItem;
+                return updatedMovies;
             }
+            // Add the new item
             return [...prev, newItem];
         });
-    }
+    };
+    const contextValue = {
+        values: {
+            ratedMovies,
+        },
+        functions: {
+            rateMovie,
+        },
+    };
 
     return (
-        <RatedMoviesContext.Provider
-            value={{
-                values: {
-                    ratedMovies,
-                },
-                functions: {
-                    rateMovie,
-                },
-            }}
-        >
+        <RatedMoviesContext.Provider value={contextValue}>
             {children}
         </RatedMoviesContext.Provider>
     );
@@ -50,8 +57,11 @@ function RatedMoviesProvider({ children }) {
 
 function useRatedMovies() {
     const context = useContext(RatedMoviesContext);
-    if (!context) throw new Error("The context is used outside it's provider!");
-
+    if (!context) {
+        throw new Error(
+            "useRatedMovies must be used within a RatedMoviesProvider"
+        );
+    }
     return context;
 }
 
