@@ -11,7 +11,7 @@
 }
 
 .movies {
-    &__popular, &__nowPlaying, &__topRated {
+    &__popular, &__now_playing, &__top_rated {
         margin-bottom: calc($def-space * 2);
     }
 

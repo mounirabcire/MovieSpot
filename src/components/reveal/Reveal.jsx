@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
 
 import styles from "./Reveal.module.scss";
@@ -64,4 +64,4 @@ function Reveal({ children }) {
     );
 }
 
-export default Reveal;
+export default memo(Reveal);

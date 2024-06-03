@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 
 import { BASE_IMG } from "../../services/apiInfo";
+import { useFavoriteList } from "../../contexts/FavoriteListContext";
+
 import MaxTxtLength from "../max-text-length/MaxTxtLength";
 import Reveal from "../reveal/Reveal";
 import styles from "./Card.module.scss";
 import Button from "../button/Button";
-import { useFavoriteList } from "../../contexts/FavoriteListContext";
+import { memo } from "react";
 
 function CardItem({ data, page, isFavpage = false }) {
     // Hooks
@@ -138,4 +140,4 @@ function CardItem({ data, page, isFavpage = false }) {
     );
 }
 
-export default CardItem;
+export default memo( CardItem);

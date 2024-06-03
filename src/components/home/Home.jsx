@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { getTrendingAll } from "../../services/trendingAll";
 
@@ -13,27 +13,34 @@ import TrendingAll from "../../features/movie-categories/trending-all/TrendingAl
 
 function Home() {
     // Hooks
-    const { results: data } = useLoaderData();
     const [maxRowData, setMaxRowData] = useState({ movies: 6, tvs: 6 });
+    const loaderData = useLoaderData();
+    const data = useMemo(() => loaderData.results, [loaderData]);
 
-    // Derive states
-    const trendingMovies = data.filter(
-        movie =>
-            movie.media_type === "movie" &&
-            Boolean(movie.backdrop_path) !== false
-    );
-    const trendingTvs = data.filter(
-        movie =>
-            movie.media_type === "tv" && Boolean(movie.backdrop_path) !== false
-    );
+    // Memoize derived states
+    const trendingMovies = useMemo(() => {
+        return data.filter(
+            movie =>
+                movie.media_type === "movie" &&
+                Boolean(movie.backdrop_path) !== false
+        );
+    }, [data]);
+
+    const trendingTvs = useMemo(() => {
+        return data.filter(
+            movie =>
+                movie.media_type === "tv" &&
+                Boolean(movie.backdrop_path) !== false
+        );
+    }, [data]);
 
     // Functions
-    function updateMaxRowData(dataNum, type) {
-        setMaxRowData(prev => ({ ...prev, [type]: prev[type] + dataNum }));
-    }
-    function updateMinRowData(dataNum, type) {
-        setMaxRowData(prev => ({ ...prev, [type]: prev[type] - dataNum }));
-    }
+    const updateRowData = (dataNum, type, increase = true) => {
+        setMaxRowData(prev => ({
+            ...prev,
+            [type]: increase ? prev[type] + dataNum : prev[type] - dataNum,
+        }));
+    };
 
     return (
         <>
@@ -62,17 +69,15 @@ function Home() {
                                 See more
                             </Button>
                         ) : (
-                            <Button
-                                onClick={() => updateMaxRowData(6, "movies")}
-                            >
+                            <Button onClick={() => updateRowData(6, "movies")}>
                                 See more
                             </Button>
                         )}
-                          {maxRowData.movies > 6 && (
+                        {maxRowData.movies > 6 && (
                             <Button
                                 style={{ marginLeft: "1rem" }}
                                 onClick={() =>
-                                    updateMinRowData(6, "movies")
+                                    updateRowData(6, "movies", false)
                                 }
                             >
                                 See less
@@ -97,16 +102,14 @@ function Home() {
                                 See more
                             </Button>
                         ) : (
-                            <Button onClick={() => updateMaxRowData(6, "tvs")}>
+                            <Button onClick={() => updateRowData(6, "tvs")}>
                                 See more
                             </Button>
                         )}
-                          {maxRowData.tvs > 6 && (
+                        {maxRowData.tvs > 6 && (
                             <Button
                                 style={{ marginLeft: "1rem" }}
-                                onClick={() =>
-                                    updateMinRowData(6, "tvs")
-                                }
+                                onClick={() => updateRowData(6, "tvs", false)}
                             >
                                 See less
                             </Button>

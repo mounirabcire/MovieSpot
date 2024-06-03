@@ -11,7 +11,7 @@
 }
 
 .tvShows {
-    &__popular, &__airingToday, &__topRated {
+    &__top_rated {
         margin-bottom: calc($def-space * 2);
     }
 

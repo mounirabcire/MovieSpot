@@ -1,7 +1,7 @@
-import { ACCESS, API_KEY, BASE_URL } from "./apiInfo";
+import { ACCESS, BASE_URL } from "./apiInfo";
 
 const TRENDING_ALL_PATH = "trending/all/day";
-const API_URL = `${BASE_URL}/${TRENDING_ALL_PATH}?api_key=${API_KEY}`;
+const API_URL = `${BASE_URL}/${TRENDING_ALL_PATH}`;
 
 const options = {
     method: "GET",

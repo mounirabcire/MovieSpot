@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useLoaderData } from "react-router-dom";
 
 import { getMovies } from "../../../services/movies";
@@ -26,164 +26,98 @@ function Movies() {
         top_rated: 6,
     });
 
+    // Memoize derived states
+    const memoizedResultsNowPlaying = useMemo(
+        () => results_now_playing,
+        [results_now_playing]
+    );
+    const memoizedResultsPopular = useMemo(
+        () => results_popular,
+        [results_popular]
+    );
+    const memoizedResultsUpcoming = useMemo(
+        () => results_upcoming,
+        [results_upcoming]
+    );
+    const memoizedResultsTopRated = useMemo(
+        () => results_top_rated,
+        [results_top_rated]
+    );
+
     // Functions
-    function updateMaxRowData(dataNum, type) {
-        setMaxRowData(prev => ({ ...prev, [type]: prev[type] + dataNum }));
-    }
-    function updateMinRowData(dataNum, type) {
-        setMaxRowData(prev => ({ ...prev, [type]: prev[type] - dataNum }));
-    }
+    const updateRowData = (dataNum, type, increase = true) => {
+        setMaxRowData(prev => ({
+            ...prev,
+            [type]: increase ? prev[type] + dataNum : prev[type] - dataNum,
+        }));
+    };
 
     return (
         <>
             <header className={styles.header}>
-                <Header data={results_now_playing} page="movie" />
+                <Header data={memoizedResultsNowPlaying} page="movie" />
             </header>
             <main className={styles.main}>
                 <Container>
-                    <div className={styles.movies__nowPlaying}>
-                        <Reveal>
-                            <h3 className={styles.movies__headingType}>
-                                Now Playing Movies
-                            </h3>
-                        </Reveal>
-                        <CardList
-                            arrayData={results_now_playing}
-                            maxRowData={maxRowData.now_playing}
-                            page="movie"
-                        />
-                        {results_now_playing.length <=
-                        maxRowData.now_playing ? (
-                            <Button
-                                style={{ cursor: "not-allowed" }}
-                                disabled={true}
-                            >
-                                See more
-                            </Button>
-                        ) : (
-                            <>
+                    {[
+                        {
+                            title: "Now Playing Movies",
+                            data: memoizedResultsNowPlaying,
+                            type: "now_playing",
+                        },
+                        {
+                            title: "Top Rated Movies",
+                            data: memoizedResultsTopRated,
+                            type: "top_rated",
+                        },
+                        {
+                            title: "Popular Movies",
+                            data: memoizedResultsPopular,
+                            type: "popular",
+                        },
+                        {
+                            title: "Upcoming Movies",
+                            data: memoizedResultsUpcoming,
+                            type: "upcoming",
+                        },
+                    ].map(({ title, data, type }) => (
+                        <div key={type} className={styles[`movies__${type}`]}>
+                            <Reveal>
+                                <h3 className={styles.movies__headingType}>
+                                    {title}
+                                </h3>
+                            </Reveal>
+                            <CardList
+                                arrayData={data}
+                                maxRowData={maxRowData[type]}
+                                page="movie"
+                            />
+                            {data.length <= maxRowData[type] ? (
                                 <Button
-                                    onClick={() =>
-                                        updateMaxRowData(6, "now_playing")
-                                    }
+                                    style={{ cursor: "not-allowed" }}
+                                    disabled={true}
                                 >
                                     See more
                                 </Button>
-                            </>
-                        )}
-                        {maxRowData.now_playing > 6 && (
-                            <Button
-                                style={{ marginLeft: "1rem" }}
-                                onClick={() =>
-                                    updateMinRowData(6, "now_playing")
-                                }
-                            >
-                                See less
-                            </Button>
-                        )}
-                    </div>
-                    <div className={styles.movies__topRated}>
-                        <Reveal>
-                            <h3 className={styles.movies__headingType}>
-                                Top Rated Movies
-                            </h3>
-                        </Reveal>
-                        <CardList
-                            arrayData={results_top_rated}
-                            maxRowData={maxRowData.top_rated}
-                            page="movie"
-                        />
-                        {results_top_rated.length <= maxRowData.top_rated ? (
-                            <Button
-                                style={{ cursor: "not-allowed" }}
-                                disabled={true}
-                            >
-                                See more
-                            </Button>
-                        ) : (
-                            <Button
-                                onClick={() => updateMaxRowData(6, "top_rated")}
-                            >
-                                See more
-                            </Button>
-                        )}
-                        {maxRowData.top_rated > 6 && (
-                            <Button
-                                style={{ marginLeft: "1rem" }}
-                                onClick={() => updateMinRowData(6, "top_rated")}
-                            >
-                                See less
-                            </Button>
-                        )}
-                    </div>
-                    <div className={styles.movies__popular}>
-                        <Reveal>
-                            <h3 className={styles.movies__headingType}>
-                                Popular Movies
-                            </h3>
-                        </Reveal>
-                        <CardList
-                            arrayData={results_popular}
-                            maxRowData={maxRowData.popular}
-                            page="movie"
-                        />
-                        {results_popular.length <= maxRowData.popular ? (
-                            <Button
-                                style={{ cursor: "not-allowed" }}
-                                disabled={true}
-                            >
-                                See more
-                            </Button>
-                        ) : (
-                            <Button
-                                onClick={() => updateMaxRowData(6, "popular")}
-                            >
-                                See more
-                            </Button>
-                        )}
-                        {maxRowData.popular > 6 && (
-                            <Button
-                                style={{ marginLeft: "1rem" }}
-                                onClick={() => updateMinRowData(6, "popular")}
-                            >
-                                See less
-                            </Button>
-                        )}
-                    </div>
-                    <div className={styles.movies__upcoming}>
-                        <Reveal>
-                            <h3 className={styles.movies__headingType}>
-                                Up Coming Movies
-                            </h3>
-                        </Reveal>
-                        <CardList
-                            arrayData={results_upcoming}
-                            maxRowData={maxRowData.upcoming}
-                            page="movie"
-                        />
-                        {results_upcoming.length <= maxRowData.upcoming ? (
-                            <Button
-                                style={{ cursor: "not-allowed" }}
-                                disabled={true}
-                            >
-                                See more
-                            </Button>
-                        ) : (
-                            <Button
-                                onClick={() => updateMaxRowData(6, "upcoming")}
-                            >
-                                See more
-                            </Button>
-                        )}
-                        {maxRowData.upcoming > 6 && (
-                            <Button
-                                style={{ marginLeft: "1rem" }}
-                                onClick={() => updateMinRowData(6, "upcoming")}
-                            >
-                                See less
-                            </Button>
-                        )}
-                    </div>
+                            ) : (
+                                <Button
+                                    onClick={() => updateRowData(6, type, true)}
+                                >
+                                    See more
+                                </Button>
+                            )}
+                            {maxRowData[type] > 6 && (
+                                <Button
+                                    style={{ marginLeft: "1rem" }}
+                                    onClick={() =>
+                                        updateRowData(6, type, false)
+                                    }
+                                >
+                                    See less
+                                </Button>
+                            )}
+                        </div>
+                    ))}
                 </Container>
             </main>
         </>
@@ -192,7 +126,6 @@ function Movies() {
 
 export async function loader() {
     const movies = await getMovies();
-
     return movies;
 }
 

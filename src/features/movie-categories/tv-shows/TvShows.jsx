@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useLoaderData } from "react-router-dom";
 
 import { getTvShows } from "../../../services/tvshows";
@@ -14,178 +14,52 @@ function TvShows() {
     // Hooks
     const tvShows = useLoaderData();
     const {
-        data_airing_today: { results: results_airing_today },
         data_popular: { results: results_popular },
-        data_on_the_air: { results: results_on_the_air },
         data_top_rated: { results: results_top_rated },
     } = tvShows;
     const [maxRowData, setMaxRowData] = useState({
-        airing_today: 6,
         popular: 6,
-        on_the_air: 6,
         top_rated: 6,
     });
 
+    // Memoize derived states
+    const memoizedResultsPopular = useMemo(() => results_popular, [results_popular]);
+    const memoizedResultsTopRated = useMemo(() => results_top_rated, [results_top_rated]);
+
     // Functions
-    function updateMaxRowData(dataNum, type) {
-        setMaxRowData(prev => ({ ...prev, [type]: prev[type] + dataNum }));
-    }
-    function updateMinRowData(dataNum, type) {
-        setMaxRowData(prev => ({ ...prev, [type]: prev[type] - dataNum }));
-    }
+    const updateRowData = (dataNum, type, increase = true) => {
+        setMaxRowData(prev => ({
+            ...prev,
+            [type]: increase ? prev[type] + dataNum : prev[type] - dataNum
+        }));
+    };
 
     return (
         <>
             <header className={styles.header}>
-                <Header data={results_airing_today} page="tv" />
+                <Header data={memoizedResultsTopRated} page="tv" />
             </header>
             <main className={styles.main}>
                 <Container>
-                    <div className={styles.tvShows__airingToday}>
-                        <Reveal>
-                            <h3 className={styles.tvShows__headingType}>
-                                Airing Today Tv Shows
-                            </h3>
-                        </Reveal>
-                        <CardList
-                            arrayData={results_airing_today}
-                            maxRowData={maxRowData.airing_today}
-                            page="tv"
-                        />
-                        {results_airing_today.length <=
-                        maxRowData.airing_today ? (
-                            <Button
-                                style={{ cursor: "not-allowed" }}
-                                disabled={true}
-                            >
-                                See more
-                            </Button>
-                        ) : (
-                            <Button
-                                onClick={() =>
-                                    updateMaxRowData(6, "airing_today")
-                                }
-                            >
-                                See more
-                            </Button>
-                        )}
-                        {maxRowData.airing_today > 6 && (
-                            <Button
-                                style={{ marginLeft: "1rem" }}
-                                onClick={() =>
-                                    updateMinRowData(6, "airing_today")
-                                }
-                            >
-                                See less
-                            </Button>
-                        )}
-                    </div>
-                    <div className={styles.tvShows__topRated}>
-                        <Reveal>
-                            <h3 className={styles.tvShows__headingType}>
-                                Top Rated Tv Shows
-                            </h3>
-                        </Reveal>
-                        <CardList
-                            arrayData={results_top_rated}
-                            maxRowData={maxRowData.top_rated}
-                            page="tv"
-                        />
-                        {results_top_rated.length <= maxRowData.top_rated ? (
-                            <Button
-                                style={{ cursor: "not-allowed" }}
-                                disabled={true}
-                            >
-                                See more
-                            </Button>
-                        ) : (
-                            <Button
-                                onClick={() => updateMaxRowData(6, "top_rated")}
-                            >
-                                See more
-                            </Button>
-                        )}
-                        {maxRowData.top_rated > 6 && (
-                            <Button
-                                style={{ marginLeft: "1rem" }}
-                                onClick={() => updateMinRowData(6, "top_rated")}
-                            >
-                                See less
-                            </Button>
-                        )}
-                    </div>
-                    <div className={styles.tvShows__popular}>
-                        <Reveal>
-                            <h3 className={styles.tvShows__headingType}>
-                                Popular Tv Shows
-                            </h3>
-                        </Reveal>
-                        <CardList
-                            arrayData={results_popular}
-                            maxRowData={maxRowData.popular}
-                            page="tv"
-                        />
-                        {results_popular.length <= maxRowData.popular ? (
-                            <Button
-                                style={{ cursor: "not-allowed" }}
-                                disabled={true}
-                            >
-                                See more
-                            </Button>
-                        ) : (
-                            <Button
-                                onClick={() => updateMaxRowData(6, "popular")}
-                            >
-                                See more
-                            </Button>
-                        )}
-                        {maxRowData.popular > 6 && (
-                            <Button
-                                style={{ marginLeft: "1rem" }}
-                                onClick={() => updateMinRowData(6, "popular")}
-                            >
-                                See less
-                            </Button>
-                        )}
-                    </div>
-                    <div className={styles.tvShows__on_the_air}>
-                        <Reveal>
-                            <h3 className={styles.tvShows__headingType}>
-                                On The Air Tv Shows
-                            </h3>
-                        </Reveal>
-                        <CardList
-                            arrayData={results_on_the_air}
-                            maxRowData={maxRowData.on_the_air}
-                            page="tv"
-                        />
-                        {results_on_the_air.length <= maxRowData.on_the_air ? (
-                            <Button
-                                style={{ cursor: "not-allowed" }}
-                                disabled={true}
-                            >
-                                See more
-                            </Button>
-                        ) : (
-                            <Button
-                                onClick={() =>
-                                    updateMaxRowData(6, "on_the_air")
-                                }
-                            >
-                                See more
-                            </Button>
-                        )}
-                        {maxRowData.on_the_air > 6 && (
-                            <Button
-                                style={{ marginLeft: "1rem" }}
-                                onClick={() =>
-                                    updateMinRowData(6, "on_the_air")
-                                }
-                            >
-                                See less
-                            </Button>
-                        )}
-                    </div>
+                    {[
+                        { title: "Top Rated Tv Shows", data: memoizedResultsTopRated, type: "top_rated" },
+                        { title: "Popular Tv Shows", data: memoizedResultsPopular, type: "popular" }
+                    ].map(({ title, data, type }) => (
+                        <div key={type} className={styles[`tvShows__${type}`]}>
+                            <Reveal>
+                                <h3 className={styles.tvShows__headingType}>{title}</h3>
+                            </Reveal>
+                            <CardList arrayData={data} maxRowData={maxRowData[type]} page="tv" />
+                            {data.length <= maxRowData[type] ? (
+                                <Button style={{ cursor: "not-allowed" }} disabled={true}>See more</Button>
+                            ) : (
+                                <Button onClick={() => updateRowData(6, type, true)}>See more</Button>
+                            )}
+                            {maxRowData[type] > 6 && (
+                                <Button style={{ marginLeft: "1rem" }} onClick={() => updateRowData(6, type, false)}>See less</Button>
+                            )}
+                        </div>
+                    ))}
                 </Container>
             </main>
         </>
@@ -194,7 +68,6 @@ function TvShows() {
 
 export async function loader() {
     const tvShows = await getTvShows();
-
     return tvShows;
 }
 

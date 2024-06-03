@@ -132,13 +132,10 @@ function Header({ data, page = "home" }) {
                 />
             </AnimatePresence>
 
-            <AnimatePresence initial={false}>
-                <HeaderImgList
-                    activeData={activeData}
-                    data={randomData}
-                    key={activeData}
-                />
-            </AnimatePresence>
+            <HeaderImgList
+                activeData={activeData}
+                data={randomData}
+            />
         </div>
     );
 }
