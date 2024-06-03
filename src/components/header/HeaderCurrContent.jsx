@@ -25,7 +25,7 @@ function HeaderCurrContent({ trend: { title, overview, id, media_type } }) {
                 </p>
             </Reveal>
             <div className={styles.header__btns}>
-                <Button type="primary">Watch trailer</Button>
+                <Button type="primary" onClick={handleNavigate}>Watch trailer</Button>
                 <Button type="secondary" onClick={handleNavigate}>
                     See details
                 </Button>

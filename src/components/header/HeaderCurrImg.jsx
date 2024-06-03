@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { animate } from "../../utils/motionAnimation";
 import { BASE_IMG } from "../../services/apiInfo";
 import styles from "./Header.module.scss";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 // Animations
 const animateBg = {
@@ -42,7 +41,6 @@ function HeaderCurrImg({ trend: { img_lg } }) {
                 alt="Movie"
                 className={styles.header__img__active}
                 {...animate(animateHeaderImg)}
-                // loading="lazy"
             />
         </>
     );

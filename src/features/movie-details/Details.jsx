@@ -57,7 +57,6 @@ function Details() {
     const videos_num = data.data_videos.results.length;
     const [vid1, vid2] = data.data_videos.results;
 
-    const isRated = ratedMovies.some(r => r.id === id);
     const item = {
         id,
         title,
@@ -67,14 +66,13 @@ function Details() {
         media_type,
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         const isRated = ratedMovies.some(r => r.id === id);
-        if(isRated){
+        if (isRated) {
             const rating = ratedMovies.find(r => r.id === id);
             setMaxNumRating(rating.rating);
         }
-
-    }, [id, ratedMovies])
+    }, [id, ratedMovies]);
 
     useEffect(() => {
         if (maxNumRating !== 0) {
@@ -101,6 +99,7 @@ function Details() {
                 className={styles.details__img_l}
                 src={`${BASE_IMG}/original${backdrop_path}`}
                 alt="movie details"
+                loading="lazy"
             />
             <AnimatePresence mode="wait">
                 {isHidden && (
@@ -144,6 +143,7 @@ function Details() {
                                 className={styles.details__img_s}
                                 src={`${BASE_IMG}/original${img_s}`}
                                 alt="movie details"
+                                loading="lazy"
                             />
                         </div>
                         <div className={styles.details__right}>
