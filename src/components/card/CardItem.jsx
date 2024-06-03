@@ -38,9 +38,10 @@ function CardItem({ data, page, isFavpage = false }) {
             <div className={styles.container}>
                 <div className={styles.card} onClick={handleNavigate}>
                     <img
-                        src={`${BASE_IMG}/original/${backdrop_path}`}
+                        src={`${BASE_IMG}/w500/${backdrop_path}`}
                         alt="Movie"
                         className={styles.card__img}
+                        loading="lazy"
                     />
                     <div className={styles.card__imgInfo}>
                         
@@ -100,9 +101,10 @@ function CardItem({ data, page, isFavpage = false }) {
     return (
         <div className={styles.card} onClick={handleNavigate}>
             <img
-                src={`${BASE_IMG}/original/${backdrop_path}`}
+                src={`${BASE_IMG}/w500/${backdrop_path}`}
                 alt="Movie"
                 className={styles.card__img}
+                loading="lazy"
             />
             <div className={styles.card__imgInfo}>
                 

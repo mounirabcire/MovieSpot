@@ -26,6 +26,7 @@ function HeaderImgItem({ trend: { title, rate, img, dataNum }, currentData }) {
                 src={`${BASE_IMG}/w500/${img}`}
                 alt="Movie"
                 className={styles.header__img}
+                loading="lazy"
             />
             {/* <div className={styles.header__imgInfo}>
                 <h4 className={styles.header__imgInfo_title}>{title}</h4>
