@@ -52,8 +52,8 @@ a:visited {
 }
 
 // Active link
-.active:link,
-.active:visited {
+a.active:link,
+a.active:visited {
     &::before {
         height: 35px;
         width: 100%;

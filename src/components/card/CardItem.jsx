@@ -4,7 +4,6 @@ import { BASE_IMG } from "../../services/apiInfo";
 import { useFavoriteList } from "../../contexts/FavoriteListContext";
 
 import MaxTxtLength from "../max-text-length/MaxTxtLength";
-import Reveal from "../reveal/Reveal";
 import styles from "./Card.module.scss";
 import Button from "../button/Button";
 import { memo } from "react";
@@ -44,15 +43,15 @@ function CardItem({ data, page, isFavpage = false }) {
                         className={styles.card__img}
                     />
                     <div className={styles.card__imgInfo}>
-                        <Reveal>
+                        
                             <h4 className={styles.card__imgInfo_title}>
                                 <MaxTxtLength maxLength={23}>
                                     {title || name}
                                 </MaxTxtLength>
                             </h4>
-                        </Reveal>
+                        
                         <div className={styles.card__imgInfo_ratesInfo}>
-                            <Reveal>
+                            
                                 <p className={styles.card__imgInfo_rate}>
                                     {vote_average.toFixed(2)}{" "}
                                     <span
@@ -63,8 +62,8 @@ function CardItem({ data, page, isFavpage = false }) {
                                         <i className="ri-star-s-fill"></i>
                                     </span>
                                 </p>
-                            </Reveal>
-                            <Reveal>
+                            
+                            
                                 <p className={styles.card__imgInfo_rateCount}>
                                     {vote_count}{" "}
                                     <span
@@ -75,7 +74,7 @@ function CardItem({ data, page, isFavpage = false }) {
                                         <i className="ri-user-fill"></i>
                                     </span>
                                 </p>
-                            </Reveal>
+                            
                         </div>
                     </div>
                 </div>
@@ -106,15 +105,15 @@ function CardItem({ data, page, isFavpage = false }) {
                 className={styles.card__img}
             />
             <div className={styles.card__imgInfo}>
-                <Reveal>
+                
                     <h4 className={styles.card__imgInfo_title}>
                         <MaxTxtLength maxLength={23}>
                             {title || name}
                         </MaxTxtLength>
                     </h4>
-                </Reveal>
+                
                 <div className={styles.card__imgInfo_ratesInfo}>
-                    <Reveal>
+                    
                         <p className={styles.card__imgInfo_rate}>
                             {vote_average.toFixed(2)}{" "}
                             <span
@@ -123,8 +122,8 @@ function CardItem({ data, page, isFavpage = false }) {
                                 <i className="ri-star-s-fill"></i>
                             </span>
                         </p>
-                    </Reveal>
-                    <Reveal>
+                    
+                    
                         <p className={styles.card__imgInfo_rateCount}>
                             {vote_count}{" "}
                             <span
@@ -133,7 +132,7 @@ function CardItem({ data, page, isFavpage = false }) {
                                 <i className="ri-user-fill"></i>
                             </span>
                         </p>
-                    </Reveal>
+                    
                 </div>
             </div>
         </div>
