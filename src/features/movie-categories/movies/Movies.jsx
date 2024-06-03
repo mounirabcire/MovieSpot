@@ -92,14 +92,7 @@ function Movies() {
                                 maxRowData={maxRowData[type]}
                                 page="movie"
                             />
-                            {data.length <= maxRowData[type] ? (
-                                <Button
-                                    style={{ cursor: "not-allowed" }}
-                                    disabled={true}
-                                >
-                                    See more
-                                </Button>
-                            ) : (
+                            {data.length > maxRowData[type] && (
                                 <Button
                                     onClick={() => updateRowData(6, type, true)}
                                 >

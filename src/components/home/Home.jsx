@@ -61,14 +61,7 @@ function Home() {
                             arrayData={trendingMovies}
                             maxRowData={maxRowData.movies}
                         />
-                        {trendingMovies.length <= maxRowData.movies ? (
-                            <Button
-                                style={{ cursor: "not-allowed" }}
-                                disabled={true}
-                            >
-                                See more
-                            </Button>
-                        ) : (
+                        {trendingMovies.length > maxRowData.movies && (
                             <Button onClick={() => updateRowData(6, "movies")}>
                                 See more
                             </Button>
@@ -94,14 +87,7 @@ function Home() {
                             arrayData={trendingTvs}
                             maxRowData={maxRowData.tvs}
                         />
-                        {trendingTvs.length <= maxRowData.tvs ? (
-                            <Button
-                                style={{ cursor: "not-allowed" }}
-                                disabled={true}
-                            >
-                                See more
-                            </Button>
-                        ) : (
+                        {trendingTvs.length > maxRowData.movies && (
                             <Button onClick={() => updateRowData(6, "tvs")}>
                                 See more
                             </Button>
