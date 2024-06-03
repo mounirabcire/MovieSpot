@@ -1,8 +1,8 @@
 import { ACCESS, API_KEY, BASE_URL } from "./apiInfo";
 
-console.log(API_KEY)
+console.log(process.env.API_KEY);
 const TRENDING_ALL_PATH = "trending/all/day";
-const API_URL = `${BASE_URL}/${TRENDING_ALL_PATH}?api_key=${API_KEY}`;
+const API_URL = `${BASE_URL}/${TRENDING_ALL_PATH}?api_key=${process.env.API_KEY}`;
 
 const options = {
     method: "GET",
