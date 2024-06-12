@@ -24,6 +24,7 @@
 -   You can remove a movie or TV show from your favorite list.
 -   You can view trailers.
 -   Your favorite list and rated movies are stored in your local storage.
+-   Responsive Design: Ensures the page looks great and functions well on all devices, including desktops, tablets, and smartphones.
 
 ## Other Feautures 💡💡
 
